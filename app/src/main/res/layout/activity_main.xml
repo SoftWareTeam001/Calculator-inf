@@ -5,5 +5,158 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="10"
+        android:orientation="vertical"
+        android:background="@drawable/show_border">
+        <LinearLayout
+            android:id="@+id/ModeTag"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal">
 
+            <TextView
+                android:id="@+id/MainMode"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="CAL "
+                android:textColor="@color/textColor"/>
+            <TextView
+                android:id="@+id/DrgeeMode"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="DEG "
+                android:textColor="@color/textColor"/>
+        </LinearLayout>
+
+        <RelativeLayout
+            android:id="@+id/MainShow"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="10"
+            android:orientation="vertical">
+            <com.daquexian.flexiblerichtextview.FlexibleRichTextView
+                android:id="@+id/Formula"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                />
+
+            <TextView
+                android:id="@+id/Result"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="14"
+                android:textColor="@color/textColor"
+                android:textDirection="rtl"
+                android:textSize="32sp"
+                android:layout_alignParentBottom="true"
+                />
+        </RelativeLayout>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="20"
+        android:id="@+id/KeyBoard"
+        android:orientation="vertical"
+        android:background="@color/black">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+            <Button
+                style="@style/BlueButton"
+                android:text="@string/shift" />
+            <Button
+                style="@style/BlueButton"
+                android:text="→"/>
+            <Button
+                style="@style/BlueButton"
+                android:text="@string/up"/>
+            <Button
+                style="@style/BlueButton"
+                android:text="@string/back"/>
+            <Button
+                style="@style/BlueButton"
+                android:text="@string/del"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+            <Button
+            style="@style/BlueButton"
+            android:text="@string/clear"/>
+            <Button
+                style="@style/BlueButton"
+                android:text="@string/left"/>
+            <Button
+                style="@style/BlueButton"
+                android:text="@string/down"/>
+            <Button
+                style="@style/BlueButton"
+                android:text="@string/right"/>
+            <Button
+                style="@style/BlueButton"
+                android:text="@string/history"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+            <Button
+                style="@style/Common"
+                android:text="@string/pi"/>
+            <Button
+                style="@style/Common"
+                android:text="@string/Ln"/>
+            <Button
+                style="@style/Common"
+                android:text="@string/Sin"/>
+            <Button
+                style="@style/Common"
+                android:text="@string/Cos"/>
+            <Button
+                style="@style/Common"
+                android:text="@string/Tan"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>
 </android.support.constraint.ConstraintLayout>

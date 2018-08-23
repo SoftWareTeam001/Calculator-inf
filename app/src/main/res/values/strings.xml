@@ -1,3 +1,18 @@
 <resources>
     <string name="app_name">Calculator inf</string>
+    <string name="shift">shift</string>
+    <string name="forward">→</string>
+    <string name="up">▲</string>
+    <string name="back">←</string>
+    <string name="del">del</string>
+    <string name="clear">AC</string>
+    <string name="left">◀</string>
+    <string name="down">▼</string>
+    <string name="right">▶</string>
+    <string name="history">His</string>
+    <string name="pi">π</string>
+    <string name="Ln">Ln</string>
+    <string name="Sin">Sin</string>
+    <string name="Cos">Cos</string>
+    <string name="Tan">Tan</string>
 </resources>
