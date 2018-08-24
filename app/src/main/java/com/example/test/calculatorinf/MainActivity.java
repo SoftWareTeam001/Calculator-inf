@@ -19,7 +19,7 @@ public class MainActivity extends AppCompatActivity {
         CodeProcessor.init(this);
         FlexibleRichTextView richTextView = (FlexibleRichTextView) findViewById(R.id.Formula);
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("$$ \\Huge \\textcolor{cyan}");
+        stringBuilder.append("$$ \\Large \\textcolor{cyan}");
         stringBuilder.append("{x^2+y^2+\\int}");
         stringBuilder.append("$$");
         richTextView.setText(stringBuilder.toString());
