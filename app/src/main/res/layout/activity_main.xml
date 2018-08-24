@@ -74,19 +74,24 @@
             android:orientation="horizontal">
             <Button
                 style="@style/BlueButton"
-                android:text="@string/shift" />
+                android:background="@mipmap/shift"
+                android:id="@+id/BtnShift"/>
             <Button
                 style="@style/BlueButton"
-                android:text="→"/>
+                android:background="@mipmap/forward"
+                android:id="@+id/BtnForwar"/>
             <Button
                 style="@style/BlueButton"
-                android:text="@string/up"/>
+                android:background="@mipmap/direction_up"
+                android:id="@+id/BtnDirectionUp"/>
             <Button
                 style="@style/BlueButton"
-                android:text="@string/back"/>
+                android:background="@mipmap/back"
+                android:id="@+id/BtnBack"/>
             <Button
                 style="@style/BlueButton"
-                android:text="@string/del"/>
+                android:background="@mipmap/delete"
+                android:id="@+id/BtnDelete"/>
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
@@ -94,19 +99,19 @@
             android:layout_weight="1">
             <Button
             style="@style/BlueButton"
-            android:text="@string/clear"/>
+            android:background="@mipmap/clear"/>
             <Button
                 style="@style/BlueButton"
-                android:text="@string/left"/>
+                android:background="@mipmap/direction_left"/>
             <Button
                 style="@style/BlueButton"
-                android:text="@string/down"/>
+                android:background="@mipmap/direction_down"/>
             <Button
                 style="@style/BlueButton"
-                android:text="@string/right"/>
+                android:background="@mipmap/direction_right"/>
             <Button
                 style="@style/BlueButton"
-                android:text="@string/history"/>
+                android:background="@mipmap/history"/>
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
@@ -114,48 +119,162 @@
             android:layout_weight="1">
             <Button
                 style="@style/Common"
-                android:text="@string/pi"/>
+                android:background="@mipmap/const_pi"/>
             <Button
                 style="@style/Common"
-                android:text="@string/Ln"/>
+                android:background="@mipmap/ln"/>
             <Button
                 style="@style/Common"
-                android:text="@string/Sin"/>
+                android:background="@mipmap/sin"/>
             <Button
                 style="@style/Common"
-                android:text="@string/Cos"/>
+                android:background="@mipmap/cos"/>
             <Button
                 style="@style/Common"
-                android:text="@string/Tan"/>
+                android:background="@mipmap/tan"/>
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1">
+            <Button
+                style="@style/Common"
+                android:background="@mipmap/var_x"/>
+            <Button
+                style="@style/Common"
+                android:background="@mipmap/square"/>
+            <Button
+                style="@style/Common"
+                android:background="@mipmap/square_root"/>
+            <Button
+                style="@style/Common"
+                android:background="@mipmap/left_brackets"/>
+            <Button
+                style="@style/Common"
+                android:background="@mipmap/right_brackets"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+            <Button
+                style="@style/Common"
+                android:background="@mipmap/number_seven"/>
+            <Button
+                style="@style/Common"
+                android:background="@mipmap/number_eight"/>
+            <Button
+                style="@style/Common"
+                android:background="@mipmap/number_nine"/>
+            <Button
+                style="@style/Common"
+                android:background="@mipmap/multiply"/>
+            <Button
+                style="@style/Common"
+                android:background="@mipmap/divide"/>
+
 
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1">
-
+            <Button
+                style="@style/Common"
+                android:background="@mipmap/number_four"/>
+            <Button
+                style="@style/Common"
+                android:background="@mipmap/number_five"/>
+            <Button
+                style="@style/Common"
+                android:background="@mipmap/number_six"/>
+            <Button
+                style="@style/Common"
+                android:background="@mipmap/add"/>
+            <Button
+                style="@style/Common"
+                android:background="@mipmap/minus"/>
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1">
+            android:layout_weight="3"
+            android:orientation="horizontal">
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_weight="4">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:orientation="horizontal"
+                    android:layout_weight="1">
+                    <Button
+                        style="@style/Common"
+                        android:background="@mipmap/number_one"/>
+                    <Button
+                        style="@style/Common"
+                        android:background="@mipmap/number_two"/>
+                    <Button
+                        style="@style/Common"
+                        android:background="@mipmap/number_three"/>
+                    <Button
+                        style="@style/Common"
+                        android:background="@mipmap/res"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1">
+                    <Button
+                        style="@style/Common"
+                        android:background="@mipmap/number_zero"/>
+                    <Button
+                        style="@style/Common"
+                        android:background="@mipmap/point"/>
+                    <Button
+                        style="@style/Common"
+                        android:background="@mipmap/ten_to_power"/>
+                    <Button
+                        style="@style/Common"
+                        android:background="@mipmap/to_fraction"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1">
+                    <Button
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@mipmap/mode"/>
+                    <Button
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@mipmap/converter"/>
+                    <Button
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@mipmap/basic_const"/>
+                    <Button
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@mipmap/change_view"/>
 
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1">
-
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1">
+                </LinearLayout>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+                <Button
+                    style="@style/Common"
+                    android:background="@mipmap/equal"/>
+            </LinearLayout>
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>
