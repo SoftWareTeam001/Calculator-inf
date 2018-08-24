@@ -7,7 +7,12 @@ import android.widget.Button;
 public class MyButton {
 
     private String this_String;
+
     public void onClickButton(String this_String){
-     System.out.println(this_String);//在屏幕上输出字符
-}
+        System.out.println(this_String);//屏幕上输出字符
+    }
+
+    public MyButton(String this_String) {
+        this.this_String=this_String;
+    }
 }
