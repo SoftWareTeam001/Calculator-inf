@@ -31,20 +31,17 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         AjLatexMath.init(this); // init library: load fonts, create paint, etc.
         CodeProcessor.init(this);
-
-        final FormulaView formulaView = (FormulaView) findViewById(R.id.Formula);
-        MyString.FormulaString.append("$$ \\Large \\textcolor{cyan} { $$");
-        final NumberButton button = (NumberButton) findViewById(R.id.NumberOneBtn);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                MyString.PopTheEnd();
-                button.ChangeFormula();
-                MyString.AddToEnd();
-                Log.i("MainActivity", MyString.FormulaString.toString());
-                formulaView.setText(MyString.FormulaString.toString());
-            }
-        });
+        MyString.FormulaString=MyString.FormulaString+"$$ \\Large \\textcolor{cyan} {}$$";
+        //绑定事件
+        BindFunction();
+    }
+    //绑定事件函数
+    public void BindFunction(){
+        FormulaView formulaView = (FormulaView) findViewById(R.id.Formula);
+        //绑定控件
+        ShowButton numberOneButton = (ShowButton) findViewById(R.id.NumberOne);
+        //设置监听
+        numberOneButton.setOnClickListener(new ShowBtnClick(numberOneButton,formulaView,(String)("1")));
     }
 }
 
