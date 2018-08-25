@@ -9,4 +9,7 @@ public class MyButton extends AppCompatButton {
     public MyButton(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
+    public void ChangeFormula(String string){
+        MyString.FormulaString+=string;
+    }
 }

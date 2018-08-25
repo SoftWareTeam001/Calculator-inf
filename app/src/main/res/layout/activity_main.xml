@@ -56,7 +56,6 @@
                 android:id="@+id/Result"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="14"
                 android:textColor="@color/textColor"
                 android:textDirection="rtl"
                 android:textSize="32sp"
@@ -93,27 +92,29 @@
                 style="@style/BlueButton"
                 android:background="@mipmap/back"
                 android:id="@+id/BtnBack"/>
-            <Button
+            <com.example.test.calculatorinf.MyButton
                 style="@style/BlueButton"
                 android:background="@mipmap/delete"
-                android:id="@+id/BtnDelete"/>
+                android:id="@+id/Delete"/>
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1">
-            <Button
-            style="@style/BlueButton"
-            android:background="@mipmap/clear"/>
+            <com.example.test.calculatorinf.MyButton
+                style="@style/BlueButton"
+                android:background="@mipmap/clear"
+                android:id="@+id/Clear"/>
             <Button
                 style="@style/BlueButton"
                 android:background="@mipmap/direction_left"/>
             <Button
                 style="@style/BlueButton"
                 android:background="@mipmap/direction_down"/>
-            <Button
+            <com.example.test.calculatorinf.MyButton
                 style="@style/BlueButton"
-                android:background="@mipmap/direction_right"/>
+                android:background="@mipmap/direction_right"
+                android:id="@+id/DirectionRight"/>
             <Button
                 style="@style/BlueButton"
                 android:background="@mipmap/history"/>
@@ -151,9 +152,10 @@
             <Button
                 style="@style/Common"
                 android:background="@mipmap/var_x"/>
-            <Button
+            <com.example.test.calculatorinf.ShowButton
                 style="@style/Common"
-                android:background="@mipmap/square"/>
+                android:background="@mipmap/square"
+                android:id="@+id/Square"/>
             <Button
                 style="@style/Common"
                 android:background="@mipmap/square_root"/>
@@ -177,7 +179,7 @@
             <com.example.test.calculatorinf.ShowButton
                 style="@style/Common"
                 android:background="@mipmap/number_eight"
-                android:id="@+id/Eight"/>
+                android:id="@+id/NumberEight"/>
             <com.example.test.calculatorinf.ShowButton
                 style="@style/Common"
                 android:background="@mipmap/number_nine"
@@ -301,9 +303,10 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1">
-                <Button
+                <com.example.test.calculatorinf.MyButton
                     style="@style/Common"
-                    android:background="@mipmap/equal"/>
+                    android:background="@mipmap/equal"
+                    android:id="@+id/Equal"/>
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
