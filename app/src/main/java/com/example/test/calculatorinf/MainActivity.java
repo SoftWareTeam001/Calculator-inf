@@ -1,15 +1,20 @@
 package com.example.test.calculatorinf;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.webkit.WebView;
 import android.widget.TextView;
 
 import org.scilab.forge.jlatexmath.core.AjLatexMath;
 
 import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
 import java.io.UnsupportedEncodingException;
 
 import io.github.kbiakov.codeview.classifier.CodeProcessor;
@@ -24,6 +29,24 @@ public class MainActivity extends AppCompatActivity {
         MyString.FormulaString=MyString.FormulaString+"$$ \\Large \\textcolor{cyan} {}$$";
         //绑定事件
         BindFunction();
+        //生成日志文件
+        final OutputStream log=new OutputStream() {
+            @Override
+            public void write(int i) throws IOException {
+                try{
+                    FileOutputStream log=openFileOutput("log.txt",MODE_PRIVATE);
+                    String str="hello";
+                    byte[] bytes=str.getBytes();
+                    log.write(bytes);
+                    log.close();
+                }
+                catch (Exception e){
+                    e.printStackTrace();
+                }
+            }
+        };
+        TextView t=(TextView)findViewById(R.id.Result);
+        t.setText(ReadLogFile("log.txt"));
     }
     //绑定事件函数
     public void BindFunction(){
@@ -126,6 +149,20 @@ public class MainActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
         return result;
+    }
+    public String ReadLogFile(String filename){
+        String res="";
+        try{
+            FileInputStream fileInputStream=openFileInput(filename);
+            int length=fileInputStream.available();
+            byte[] buffer=new byte[length];
+            fileInputStream.read(buffer);
+            res=new String(buffer);
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+        return res;
     }
 }
 

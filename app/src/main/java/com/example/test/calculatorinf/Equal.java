@@ -37,6 +37,9 @@ public class Equal implements View.OnClickListener {
                 MyString.ResultString=s;
                 Log.i(TAG,MyString.ResultString);
                 textView.setText(MyString.ResultString);
+                if(s!=null){
+                    MyString.FormulaString="";
+                }
             }
         });
 
