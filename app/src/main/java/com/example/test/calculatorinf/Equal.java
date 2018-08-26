@@ -1,5 +1,7 @@
 package com.example.test.calculatorinf;
 
+import android.app.Activity;
+import android.content.Context;
 import android.util.Log;
 import android.view.View;
 import android.webkit.ValueCallback;
@@ -7,6 +9,8 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.TextView;
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 

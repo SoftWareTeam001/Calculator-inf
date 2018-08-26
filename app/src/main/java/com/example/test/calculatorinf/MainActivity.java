@@ -26,27 +26,12 @@ public class MainActivity extends AppCompatActivity {
         //引入latex
         AjLatexMath.init(this); // init library: load fonts, create paint, etc.
         CodeProcessor.init(this);
-        MyString.FormulaString=MyString.FormulaString+"$$ \\Large \\textcolor{cyan} {}$$";
+        MyString.FormulaString = MyString.FormulaString + "$$ \\Large \\textcolor{cyan} {}$$";
         //绑定事件
         BindFunction();
         //生成日志文件
-        final OutputStream log=new OutputStream() {
-            @Override
-            public void write(int i) throws IOException {
-                try{
-                    FileOutputStream log=openFileOutput("log.txt",MODE_PRIVATE);
-                    String str="hello";
-                    byte[] bytes=str.getBytes();
-                    log.write(bytes);
-                    log.close();
-                }
-                catch (Exception e){
-                    e.printStackTrace();
-                }
-            }
-        };
-        TextView t=(TextView)findViewById(R.id.Result);
-        t.setText(ReadLogFile("log.txt"));
+        logInit();
+        //外部类调用
     }
     //绑定事件函数
     public void BindFunction(){
@@ -125,9 +110,15 @@ public class MainActivity extends AppCompatActivity {
         delete.setOnClickListener(new DeleteBtnClick(formulaView));
         directionRight.setOnClickListener(new RightBtnClick(formulaView));
         //启动JS引擎
-//        InputStream inputStream=getResources().openRawResource(R.raw.main_function);
-//        String jsFileContent=ReadRawFile(inputStream);
-        equal.setOnClickListener(new Equal(webView,"",textView));
+        InputStream inputStream=getResources().openRawResource(R.raw.main_function);
+        String jsFileContent=ReadRawFile(inputStream);
+        try{
+            FileOutputStream fileOutputStream=openFileOutput("log.txt",MODE_APPEND);
+            equal.setOnClickListener(new Equal(webView,jsFileContent,textView));
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
     }
     public String ReadRawFile(InputStream inputStream){
         InputStreamReader inputStreamReader=null;
@@ -150,19 +141,26 @@ public class MainActivity extends AppCompatActivity {
             }
         return result;
     }
-    public String ReadLogFile(String filename){
-        String res="";
+    private void logInit(){
         try{
-            FileInputStream fileInputStream=openFileInput(filename);
-            int length=fileInputStream.available();
-            byte[] buffer=new byte[length];
-            fileInputStream.read(buffer);
-            res=new String(buffer);
+            FileOutputStream fileOutputStream=openFileOutput("log.txt",MODE_PRIVATE);
+            MyLog initLog=new MyLog();
+            initLog.WriteLog("",fileOutputStream);
         }
         catch (Exception e){
             e.printStackTrace();
         }
-        return res;
+    }
+    public void addLog(){
+        try{
+            FileOutputStream fileOutputStream=openFileOutput("log.txt",MODE_APPEND);
+            MyLog newLog=new MyLog();
+            String logString="["+MyString.FormulaString+"="+MyString.ResultString+"]";
+            newLog.WriteLog(logString,fileOutputStream);
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
     }
 }
 
