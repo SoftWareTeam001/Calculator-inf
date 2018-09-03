@@ -65,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
         ShowButton leftBrackets=(ShowButton)findViewById(R.id.LeftBrackets);
         ShowButton rightBrackets=(ShowButton)findViewById(R.id.RightBrackets);
         //常数
-        ShowButton constPi=(ShowButton)findViewById(R.id.ConsrPi);
+        ShowButton constPi=(ShowButton)findViewById(R.id.ConstPi);
         //特殊
         ShowButton square=(ShowButton)findViewById(R.id.Square);
 
