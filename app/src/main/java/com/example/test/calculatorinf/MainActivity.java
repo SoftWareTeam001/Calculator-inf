@@ -1,9 +1,14 @@
 package com.example.test.calculatorinf;
+import android.app.Activity;
+import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.webkit.WebView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.daquexian.flexiblerichtextview.TextWithFormula;
 
 import org.scilab.forge.jlatexmath.core.AjLatexMath;
 
@@ -19,6 +24,7 @@ import java.io.UnsupportedEncodingException;
 
 import io.github.kbiakov.codeview.classifier.CodeProcessor;
 public class MainActivity extends AppCompatActivity {
+    private Context mContext;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,7 +32,10 @@ public class MainActivity extends AppCompatActivity {
         //引入latex
         AjLatexMath.init(this); // init library: load fonts, create paint, etc.
         CodeProcessor.init(this);
-        MyString.FormulaString = MyString.FormulaString + "$$ \\Large \\textcolor{cyan} {}$$";
+        //初始化
+        MyString.FormulaString = MyString.FormulaString + "$$ \\Huge \\textcolor{cyan} {}{\\textcolor{yellow}|}$$";
+        FormulaView formulaView=(FormulaView)findViewById(R.id.Formula);
+        formulaView.setText(MyString.FormulaString);
         //绑定事件
         BindFunction();
         //生成日志文件
@@ -74,6 +83,9 @@ public class MainActivity extends AppCompatActivity {
         MyButton delete=(MyButton)findViewById(R.id.Delete);
         MyButton directionRight=(MyButton)findViewById(R.id.DirectionRight);
         MyButton equal=(MyButton)findViewById(R.id.Equal);
+        MyButton directionUp=(MyButton)findViewById(R.id.DirectionUp);
+        MyButton directionDown=(MyButton)findViewById(R.id.DirectionDown);
+        MyButton history=(MyButton)findViewById(R.id.History);
         //设置监听
 
         //十个数字
@@ -109,20 +121,24 @@ public class MainActivity extends AppCompatActivity {
         clear.setOnClickListener(new ACButtonClick(formulaView));
         delete.setOnClickListener(new DeleteBtnClick(formulaView));
         directionRight.setOnClickListener(new RightBtnClick(formulaView));
+        directionUp.setOnClickListener(new UpDirectionBtnClick(formulaView,textView,MainActivity.this));
+        directionDown.setOnClickListener(new DownDirectionBtnClick(formulaView,textView,MainActivity.this));
+        directionDown.setOnClickListener(new HistoryClick(MainActivity.this));
         //启动JS引擎
         InputStream inputStream=getResources().openRawResource(R.raw.main_function);
         String jsFileContent=ReadRawFile(inputStream);
+        //等号
         try{
-            FileOutputStream fileOutputStream=openFileOutput("log.txt",MODE_APPEND);
-            equal.setOnClickListener(new Equal(webView,jsFileContent,textView));
+            equal.setOnClickListener(new Equal(webView,jsFileContent,textView,MainActivity.this));
         }
         catch (Exception e){
             e.printStackTrace();
         }
     }
+    //读取js文件
     public String ReadRawFile(InputStream inputStream){
         InputStreamReader inputStreamReader=null;
-        String result=new String();
+        String result="";
         try{
             inputStreamReader=new InputStreamReader(inputStream,"utf-8");
         }
@@ -133,7 +149,7 @@ public class MainActivity extends AppCompatActivity {
         String line;
         try{
             while ((line=reader.readLine())!=null){
-                result+=line.toString();
+                result+=line;
             }
             }
             catch (IOException e){
@@ -141,26 +157,37 @@ public class MainActivity extends AppCompatActivity {
             }
         return result;
     }
-    private void logInit(){
-        try{
-            FileOutputStream fileOutputStream=openFileOutput("log.txt",MODE_PRIVATE);
-            MyLog initLog=new MyLog();
-            initLog.WriteLog("",fileOutputStream);
-        }
-        catch (Exception e){
+    //日志初始化
+    private void logInit() {
+        try {
+            FileOutputStream fileOutputStream =MainActivity.this.openFileOutput("log.txt", MODE_APPEND);
+            fileOutputStream.close();
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
-    public void addLog(){
+    private void showToast(String message){
+        Toast toast = Toast.makeText(MainActivity.this, message, Toast.LENGTH_LONG);
+        TextView v = (TextView) toast.getView().findViewById(android.R.id.message);
+        toast.show();
+    }
+    private String readFile(String fileName){
+        StringBuilder sb = new StringBuilder("");
         try{
-            FileOutputStream fileOutputStream=openFileOutput("log.txt",MODE_APPEND);
-            MyLog newLog=new MyLog();
-            String logString="["+MyString.FormulaString+"="+MyString.ResultString+"]";
-            newLog.WriteLog(logString,fileOutputStream);
+            FileInputStream input =openFileInput(fileName);
+            byte[] temp = new byte[1024];
+            int len = 0;
+            //读取文件内容:
+            while ((len = input.read(temp)) > 0) {
+                sb.append(new String(temp, 0, len));
+            }
+            //关闭输入流
+            input.close();
         }
         catch (Exception e){
             e.printStackTrace();
         }
+        return sb.toString();
     }
 }
 

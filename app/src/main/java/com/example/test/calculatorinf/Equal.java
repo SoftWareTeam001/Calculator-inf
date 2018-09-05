@@ -9,10 +9,7 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.TextView;
 
-import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 
 import static android.content.ContentValues.TAG;
 
@@ -20,10 +17,12 @@ public class Equal implements View.OnClickListener {
     private WebView webView;
     private String jsContent;
     private TextView textView;
-    public Equal(WebView webView,String jsContent,TextView textView){
+    private Context mContext;
+    public Equal(WebView webView,String jsContent,TextView textView,Context mContext){
         this.webView=webView;
         this.jsContent=jsContent;
         this.textView=textView;
+        this.mContext=mContext;
     }
     @Override
     public void onClick(View v){
@@ -42,15 +41,23 @@ public class Equal implements View.OnClickListener {
                 Log.i(TAG,MyString.ResultString);
                 textView.setText(MyString.ResultString);
                 if(s!=null){
-                    MyString.FormulaString="";
+                    try{
+                          MyLog myLog=new MyLog(mContext);
+                          myLog.WriteLog();
+                          reset();
+                    }
+                    catch (Exception e){
+                        e.printStackTrace();
+                    }
+
                 }
             }
         });
-
     }
     private String handleFormulaString(){
         String initString=MyString.FormulaString;
         //去除修饰
+        initString=initString.replace("{\\textcolor{yellow}|}","");
         String Regex="(.*?\\{)";
         initString=initString.replaceFirst(Regex, "");
         initString=initString.replaceFirst(Regex, "");
@@ -74,5 +81,10 @@ public class Equal implements View.OnClickListener {
         //解决pi
         initString=initString.replaceAll("\\\\pi","Math.PI");
         return initString;
+    }
+    public void reset(){
+        MyString.FormulaString="$$ \\Huge \\textcolor{cyan} {}$$";
+        FormulaView.leftMove=0;
+        MyLog.currentLog=0;
     }
 }

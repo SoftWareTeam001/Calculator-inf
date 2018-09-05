@@ -5,6 +5,7 @@ public class MyString {
     public static String ResultString=new String();
     //替换掉末尾的标识符
     public static void PopTheEnd(){
+        FormulaString=FormulaString.replace("{\\textcolor{yellow}|}","");
         FormulaString=FormulaString.replace("}$$","");
         for(int i=0;i<FormulaView.leftMove;i++){
             FormulaString=FormulaString.substring(0,FormulaString.length()-1);
@@ -12,6 +13,7 @@ public class MyString {
     }
     //添加末尾的标识符
     public static void AddToEnd(){
+        FormulaString+="{\\textcolor{yellow}|}";
         for(int i=0;i<FormulaView.leftMove;i++){
             FormulaString+="}";
         }

@@ -14,6 +14,8 @@ public class RightBtnClick implements View.OnClickListener {
     public void onClick(View v){
         if(FormulaView.leftMove>0){
             FormulaView.leftMove-=1;
+            MyString.PopTheEnd();
+            MyString.AddToEnd();
             formulaView.setText(MyString.FormulaString);
             Log.i(TAG,MyString.FormulaString);
         }

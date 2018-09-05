@@ -9,7 +9,7 @@ public class ACButtonClick implements View.OnClickListener {
     }
     @Override
     public void onClick(View v){
-        MyString.FormulaString="$$ \\Large \\textcolor{cyan} {}$$";
+        MyString.FormulaString="$$ \\Huge \\textcolor{cyan} {}$$";
         formulaView.setText(MyString.FormulaString);
         FormulaView.leftMove=0;
     }

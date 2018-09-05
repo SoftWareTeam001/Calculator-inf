@@ -4,7 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    android:id="@+id/CalFirstMain">
+
     <WebView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -84,10 +86,10 @@
                 style="@style/BlueButton"
                 android:background="@mipmap/forward"
                 android:id="@+id/BtnForwar"/>
-            <Button
+            <com.example.test.calculatorinf.MyButton
                 style="@style/BlueButton"
                 android:background="@mipmap/direction_up"
-                android:id="@+id/BtnDirectionUp"/>
+                android:id="@+id/DirectionUp"/>
             <Button
                 style="@style/BlueButton"
                 android:background="@mipmap/back"
@@ -108,16 +110,18 @@
             <Button
                 style="@style/BlueButton"
                 android:background="@mipmap/direction_left"/>
-            <Button
+            <com.example.test.calculatorinf.MyButton
                 style="@style/BlueButton"
-                android:background="@mipmap/direction_down"/>
+                android:background="@mipmap/direction_down"
+                android:id="@+id/DirectionDown"/>
             <com.example.test.calculatorinf.MyButton
                 style="@style/BlueButton"
                 android:background="@mipmap/direction_right"
                 android:id="@+id/DirectionRight"/>
-            <Button
+            <com.example.test.calculatorinf.MyButton
                 style="@style/BlueButton"
-                android:background="@mipmap/history"/>
+                android:background="@mipmap/history"
+                android:id="@+id/History"/>
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
