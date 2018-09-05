@@ -131,7 +131,7 @@
             <com.example.test.calculatorinf.ShowButton
                 style="@style/Common"
                 android:background="@mipmap/const_pi"
-                android:id="@+id/ConsrPi"/>
+                android:id="@+id/ConstPi"/>
             <com.example.test.calculatorinf.ShowButton
                 style="@style/Common"
                 android:background="@mipmap/ln"
