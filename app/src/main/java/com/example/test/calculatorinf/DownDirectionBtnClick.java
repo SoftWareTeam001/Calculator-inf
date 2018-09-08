@@ -6,11 +6,9 @@ import android.view.View;
 import android.widget.TextView;
 
 public class DownDirectionBtnClick implements View.OnClickListener {
-    private FormulaView formulaView;
     private TextView textView;
     private Context context;
-    public DownDirectionBtnClick(FormulaView formulaView, TextView textView, Context context){
-        this.formulaView=formulaView;
+    public DownDirectionBtnClick( TextView textView, Context context){
         this.textView=textView;
         this.context=context;
     }
@@ -18,6 +16,7 @@ public class DownDirectionBtnClick implements View.OnClickListener {
     public void onClick(View v){
         MyLog myLog=new MyLog(context);
         String[] nextLog=myLog.GetNextLog();
+        FormulaView formulaView=(FormulaView)MainActivity.getMainActivity().findViewById(R.id.Formula);
         formulaView.setText(nextLog[0]);
         textView.setText(nextLog[1]);
         MyString.FormulaString=nextLog[0];

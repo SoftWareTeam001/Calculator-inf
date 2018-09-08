@@ -15,45 +15,40 @@ import static android.content.ContentValues.TAG;
 
 public class Equal implements View.OnClickListener {
     private WebView webView;
-    private String jsContent;
     private TextView textView;
     private Context mContext;
-    public Equal(WebView webView,String jsContent,TextView textView,Context mContext){
+    public Equal(WebView webView,TextView textView,Context mContext){
         this.webView=webView;
-        this.jsContent=jsContent;
         this.textView=textView;
         this.mContext=mContext;
     }
     @Override
     public void onClick(View v){
-        WebSettings webSettings = webView.getSettings();
-        // 设置与Js交互的权限
-        webSettings.setJavaScriptEnabled(true);
-        // 设置允许JS弹窗
-        webSettings.setJavaScriptCanOpenWindowsAutomatically(true);
-//        String ExeJs=jsContent+"eval("+handleFormulaString()+")";
         Log.i(TAG,handleFormulaString());
-        String ExeJs="eval("+handleFormulaString()+")";
-        webView.evaluateJavascript(ExeJs, new ValueCallback<String>() {
-            @Override
-            public void onReceiveValue(String s) {
-                MyString.ResultString=s;
-                Log.i(TAG,MyString.ResultString);
-                textView.setText(MyString.ResultString);
-                if(s!=null){
-                    try{
-                          MyLog myLog=new MyLog(mContext);
-                          myLog.WriteLog();
-                          reset();
-                    }
-                    catch (Exception e){
-                        e.printStackTrace();
-                    }
-
-                }
-            }
-        });
-    }
+        webView.post(new Runnable() {
+             @Override
+             public void run() {
+                 webView.evaluateJavascript("javascript:calculate("+handleFormulaString()+")", new ValueCallback<String>() {
+                     @Override
+                     public void onReceiveValue(String value) {
+                         MyString.ResultString=value;
+                         textView.setText(MyString.ResultString);
+                         Log.i(TAG,MyString.ResultString);
+                         if(!value.equals("null")){
+                             try{
+                                 MyLog myLog=new MyLog(mContext);
+                                 myLog.WriteLog();
+                                 reset();
+                             }
+                             catch (Exception e){
+                                 e.printStackTrace();
+                             }
+                         }
+                     }
+                 });
+             }
+         });
+}
     private String handleFormulaString(){
         String initString=MyString.FormulaString;
         //去除修饰
@@ -70,14 +65,18 @@ public class Equal implements View.OnClickListener {
         initString=initString.replaceAll("(?<=\\^\\{\\d{1,100})\\}", ")");
         initString=initString.replaceAll("\\^\\{", ",");
         //解决三角函数
-        initString=initString.replaceAll("Sin","Math.sin");
-        initString=initString.replaceAll("Cos","Math.cos");
-        initString=initString.replaceAll("Tan","Math.cos");
+        initString=initString.replaceAll("\\\\sin","Math.sin");
+        initString=initString.replaceAll("\\\\cos","Math.cos");
+        initString=initString.replaceAll("\\\\tan","Math.cos");
+        initString=initString.replaceAll("\\\\arcsin","Math.asin");
+        initString=initString.replaceAll("\\\\arccos","Math.acos");
+        initString=initString.replaceAll("\\\\arctan","Math.atan");
         //解决符号
         initString=initString.replaceAll("\\\\times","*");
         initString=initString.replaceAll("\\\\div","/");
         //解决对数
-        initString=initString.replaceAll("Ln","Math.log");
+        initString=initString.replaceAll("\\\\ln","Math.log");
+        initString=initString.replaceAll("\\\\lg","lg");
         //解决pi
         initString=initString.replaceAll("\\\\pi","Math.PI");
         return initString;

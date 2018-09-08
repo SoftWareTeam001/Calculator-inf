@@ -8,18 +8,25 @@ import static android.content.ContentValues.TAG;
 
 public class ShowBtnClick implements View.OnClickListener {
     public ShowButton showButton;
-    public FormulaView formulaView;
     public String Content;
-    public ShowBtnClick(ShowButton showButton,FormulaView formulaView,String Content){
+    public ShowBtnClick(ShowButton showButton,String Content){
         this.showButton=showButton;
-        this.formulaView=formulaView;
         this.Content=Content;
     }
     public void onClick(View v){
+
         MyString.PopTheEnd();
         showButton.ChangeFormula(Content);
         MyString.AddToEnd();
-        formulaView.setText(MyString.FormulaString);
         Log.i(TAG,MyString.FormulaString);
+        //转变
+        if(ControlVar.Shift){
+            MainActivity.getMainActivity().setContentView(R.layout.activity_main);
+            ControlVar.Shift=false;
+        }
+        FormulaView formulaView=(FormulaView)MainActivity.getMainActivity().findViewById(R.id.Formula);
+        formulaView.setText(MyString.FormulaString);
+        Bind bind=new Bind();
+        bind.BindFunction();
     }
 }
