@@ -102,6 +102,8 @@ public class Equal implements View.OnClickListener {
         else{
             initString=initString.replaceAll("Res","0");
         }
+        //e
+        initString=initString.replaceAll("e","math.E");
         //删除删除时保留的括号
         initString=initString.replaceAll("\\{","").replaceAll("\\}","");
         return initString;
