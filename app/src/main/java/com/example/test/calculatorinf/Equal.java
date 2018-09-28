@@ -71,8 +71,8 @@ public class Equal implements View.OnClickListener {
         initString=initString.replaceAll("\\\\sqrt\\[2\\]\\{","math.sqrt(");
         initString=initString.replaceAll("(?<=math.sqrt\\(.{1,100})\\}",")");
         //解决power
-        initString=initString.replaceAll("(?=.+\\^)","math.pow(");
-        initString=initString.replaceAll("(?<=\\^\\{.{1,100})\\}", ")");
+        initString=initString.replaceAll("(?=\\d{1,100}\\^)","math.pow(");
+        initString=initString.replaceAll("(?<=\\^\\{\\d{1,100})\\}", ")");
         initString=initString.replaceAll("\\^\\{", ",");
         //解决三角函数
         if(ControlVar.rad){

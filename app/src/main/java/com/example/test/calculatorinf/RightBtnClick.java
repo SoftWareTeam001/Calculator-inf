@@ -2,22 +2,31 @@ package com.example.test.calculatorinf;
 
 import android.util.Log;
 import android.view.View;
+import android.view.View.OnClickListener;
 
-import static android.content.ContentValues.TAG;
-
-public class RightBtnClick implements View.OnClickListener {
+public class RightBtnClick
+        implements View.OnClickListener
+{
     private FormulaView formulaView;
-    public RightBtnClick(FormulaView formulaView){
-        this.formulaView=formulaView;
+
+    public RightBtnClick(FormulaView paramFormulaView)
+    {
+        this.formulaView = paramFormulaView;
     }
-    @Override
-    public void onClick(View v){
-        if(FormulaView.leftMove>0){
-            FormulaView.leftMove-=1;
-            MyString.PopTheEnd();
-            MyString.AddToEnd();
-            formulaView.setText(MyString.FormulaString);
-            Log.i(TAG,MyString.FormulaString);
+
+    public void onClick(View paramView)
+    {
+        if ((ControlVar.leftMove > 0) && (!ControlVar.sub))
+        {
+            ControlVar.leftMove -= 1;
+            MyString.MoveCursor(ControlVar.leftMove);
         }
+        if (ControlVar.sub)
+        {
+            ControlVar.leftMove -= 3;
+            MyString.MoveCursor(ControlVar.leftMove);
+            ControlVar.sub = false;
+        }
+        Log.i("ContentValues", MyString.FormulaString);
     }
 }

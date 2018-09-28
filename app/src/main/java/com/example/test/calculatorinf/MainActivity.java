@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
         AjLatexMath.init(this); // init library: load fonts, create paint, etc.
         CodeProcessor.init(this);
         //初始化
-        MyString.FormulaString = MyString.FormulaString + "$$ \\Huge \\textcolor{cyan} {}{\\textcolor{yellow}|}$$";
+        MyString.FormulaString = MyString.InitString;
         FormulaView formulaView = (FormulaView) findViewById(R.id.Formula);
         formulaView.setText(MyString.FormulaString);
         //绑定事件

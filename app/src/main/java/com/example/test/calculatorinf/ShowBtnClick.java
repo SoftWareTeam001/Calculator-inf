@@ -2,31 +2,27 @@ package com.example.test.calculatorinf;
 
 import android.util.Log;
 import android.view.View;
-import android.widget.TextView;
+import android.view.View.OnClickListener;
 
-import static android.content.ContentValues.TAG;
-
-public class ShowBtnClick implements View.OnClickListener {
-    public ShowButton showButton;
+public class ShowBtnClick implements View.OnClickListener
+{
     public String Content;
-    public ShowBtnClick(ShowButton showButton,String Content){
-        this.showButton=showButton;
-        this.Content=Content;
-    }
-    public void onClick(View v){
 
-        MyString.PopTheEnd();
-        showButton.ChangeFormula(Content);
-        MyString.AddToEnd();
-        Log.i(TAG,MyString.FormulaString);
-        //转变
-        if(ControlVar.Shift){
+    public ShowBtnClick(String content)
+    {
+        this.Content = content;
+    }
+
+    public void onClick(View paramView)
+    {
+        MyString.ChangeFormula(this.Content);
+        Log.i("ContentValues", MyString.FormulaString);
+        if (ControlVar.Shift)
+        {
             MainActivity.getMainActivity().setContentView(R.layout.activity_main);
-            ControlVar.Shift=false;
+            ControlVar.Shift = false;
         }
-        FormulaView formulaView=(FormulaView)MainActivity.getMainActivity().findViewById(R.id.Formula);
-        formulaView.setText(MyString.FormulaString);
-        Bind bind=new Bind();
-        bind.BindFunction();
+        ((FormulaView)MainActivity.getMainActivity().findViewById(R.id.Formula)).setText(MyString.FormulaString);
+        new Bind().BindFunction();
     }
 }

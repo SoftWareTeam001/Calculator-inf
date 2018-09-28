@@ -50,6 +50,7 @@ public class Bind {
         ShowButton fraction=(ShowButton)MainActivity.getMainActivity().findViewById(R.id.Fraction);
         ShowButton combination=(ShowButton)MainActivity.getMainActivity().findViewById(R.id.Combination);
         ShowButton permutation=(ShowButton)MainActivity.getMainActivity().findViewById(R.id.Permutation);
+        ShowButton squreRoot=(ShowButton)MainActivity.getMainActivity().findViewById(R.id.SquareRoot);
         //括号
         ShowButton leftBrackets = (ShowButton) MainActivity.getMainActivity().findViewById(R.id.LeftBrackets);
         ShowButton rightBrackets = (ShowButton) MainActivity.getMainActivity().findViewById(R.id.RightBrackets);
@@ -58,6 +59,8 @@ public class Bind {
         ShowButton constE=(ShowButton)MainActivity.getMainActivity().findViewById(R.id.Conste);
         //特殊
         ShowButton square = (ShowButton) MainActivity.getMainActivity().findViewById(R.id.Square);
+        ShowButton res=(ShowButton)MainActivity.getMainActivity().findViewById(R.id.Res);
+
         //功能
         MyButton clear = (MyButton) MainActivity.getMainActivity().findViewById(R.id.Clear);
         MyButton delete = (MyButton) MainActivity.getMainActivity().findViewById(R.id.Delete);
@@ -67,57 +70,63 @@ public class Bind {
         MyButton directionDown = (MyButton) MainActivity.getMainActivity().findViewById(R.id.DirectionDown);
         MyButton history = (MyButton) MainActivity.getMainActivity().findViewById(R.id.History);
         MyButton shift=(MyButton)MainActivity.getMainActivity().findViewById(R.id.BtnShift);
+        MyButton directionLeft=(MyButton)MainActivity.getMainActivity().findViewById(R.id.DirectionLeft);
         //按完shift
         if(ControlVar.Shift){
-            constE.setOnClickListener(new ShowBtnClick(constE,"e"));
-            log.setOnClickListener(new ShowBtnClick(log,"\\lg("));
-            arcSin.setOnClickListener(new ShowBtnClick(arcSin,"\\arcsin("));
-            arcCos.setOnClickListener(new ShowBtnClick(arcCos,"\\arccos"));
-            arcTan.setOnClickListener(new ShowBtnClick(arcTan,"\\arctan("));
-            reciprocal.setOnClickListener(new ShowBtnClick(reciprocal,"^{-1}"));
-            cube.setOnClickListener(new ShowBtnClick(reciprocal,"^{3}"));
-            threeRoot.setOnClickListener(new SpecialBtnClick(threeRoot,"\\sqrt[3]{}"));
-            power.setOnClickListener(new SpecialBtnClick(power,"^{}"));
+            constE.setOnClickListener(new ShowBtnClick("e"));
+            log.setOnClickListener(new ShowBtnClick("\\lg("));
+            arcSin.setOnClickListener(new ShowBtnClick("\\arcsin("));
+            arcCos.setOnClickListener(new ShowBtnClick("\\arccos"));
+            arcTan.setOnClickListener(new ShowBtnClick("\\arctan("));
+            reciprocal.setOnClickListener(new ShowBtnClick("^{-1}"));
+            cube.setOnClickListener(new ShowBtnClick("^{3}"));
+            threeRoot.setOnClickListener(new SpecialBtnClick("\\sqrt[3]{}"));
+            power.setOnClickListener(new SpecialBtnClick("^{}"));
+            combination.setOnClickListener(new DoubleParaClick("C_{}^{}"));
+            permutation.setOnClickListener(new DoubleParaClick("P_{}^{}"));
         }
         //未按shift
         else{
             //数字
-            numberZero.setOnClickListener(new ShowBtnClick(numberZero,(String) ("0")));
-            numberOne.setOnClickListener(new ShowBtnClick(numberOne,(String) ("1")));
-            numberTwo.setOnClickListener(new ShowBtnClick(numberTwo,(String) ("2")));
-            numberThree.setOnClickListener(new ShowBtnClick(numberThree,(String) ("3")));
-            numberFour.setOnClickListener(new ShowBtnClick(numberFour,(String) ("4")));
-            numberFive.setOnClickListener(new ShowBtnClick(numberFive,(String) ("5")));
-            numberSix.setOnClickListener(new ShowBtnClick(numberSix,(String) ("6")));
-            numberSeven.setOnClickListener(new ShowBtnClick(numberSeven,(String) ("7")));
-            numberEight.setOnClickListener(new ShowBtnClick(numberEight,(String) ("8")));
-            numberNine.setOnClickListener(new ShowBtnClick(numberNine,(String) ("9")));
-            numberPint.setOnClickListener(new ShowBtnClick(numberPint,(String) (".")));
+            numberZero.setOnClickListener(new ShowBtnClick("0"));
+            numberOne.setOnClickListener(new ShowBtnClick("1"));
+            numberTwo.setOnClickListener(new ShowBtnClick("2"));
+            numberThree.setOnClickListener(new ShowBtnClick("3"));
+            numberFour.setOnClickListener(new ShowBtnClick("4"));
+            numberFive.setOnClickListener(new ShowBtnClick("5"));
+            numberSix.setOnClickListener(new ShowBtnClick("6"));
+            numberSeven.setOnClickListener(new ShowBtnClick("7"));
+            numberEight.setOnClickListener(new ShowBtnClick("8"));
+            numberNine.setOnClickListener(new ShowBtnClick("9"));
+            numberPint.setOnClickListener(new ShowBtnClick("."));
             //运算符
-            add.setOnClickListener(new ShowBtnClick(add,"+"));
-            minus.setOnClickListener(new ShowBtnClick(minus,"-"));
-            multiply.setOnClickListener(new ShowBtnClick(multiply,"\\times "));
-            divide.setOnClickListener(new ShowBtnClick(divide,"\\div "));
+            add.setOnClickListener(new ShowBtnClick("+"));
+            minus.setOnClickListener(new ShowBtnClick("-"));
+            multiply.setOnClickListener(new ShowBtnClick("\\times "));
+            divide.setOnClickListener(new ShowBtnClick("\\div "));
             //函数
-            sin.setOnClickListener(new ShowBtnClick(sin,"\\sin("));
-            cos.setOnClickListener(new ShowBtnClick(cos,"\\cos("));
-            tan.setOnClickListener(new ShowBtnClick(tan,"\\tan("));
-            ln.setOnClickListener(new ShowBtnClick(ln,"\\ln("));
+            sin.setOnClickListener(new ShowBtnClick("\\sin("));
+            cos.setOnClickListener(new ShowBtnClick("\\cos("));
+            tan.setOnClickListener(new ShowBtnClick("\\tan("));
+            ln.setOnClickListener(new ShowBtnClick("\\ln("));
             //常数
-            constPi.setOnClickListener(new ShowBtnClick(constPi,"\\pi "));
+            constPi.setOnClickListener(new ShowBtnClick("\\pi "));
             //特殊
-            square.setOnClickListener(new ShowBtnClick(constPi,"^{2}"));
+            square.setOnClickListener(new ShowBtnClick("^{2}"));
+            squreRoot.setOnClickListener(new SpecialBtnClick("\\sqrt[2]{}"));
+            res.setOnClickListener(new ShowBtnClick("Res"));
         }
         //通用部分
         //括号
-        leftBrackets.setOnClickListener(new ShowBtnClick(leftBrackets,"("));
-        rightBrackets.setOnClickListener(new ShowBtnClick(rightBrackets,")"));
+        leftBrackets.setOnClickListener(new ShowBtnClick("("));
+        rightBrackets.setOnClickListener(new ShowBtnClick(")"));
         //功能
         clear.setOnClickListener(new ACButtonClick(formulaView));
         delete.setOnClickListener(new DeleteBtnClick(formulaView));
         directionRight.setOnClickListener(new RightBtnClick(formulaView));
         directionUp.setOnClickListener(new UpDirectionBtnClick(textView, MainActivity.getMainActivity()));
         directionDown.setOnClickListener(new DownDirectionBtnClick(textView, MainActivity.getMainActivity()));
+        directionLeft.setOnClickListener(new LeftBtnClick(formulaView));
         history.setOnClickListener(new HistoryClick(MainActivity.getMainActivity()));
         //等号
         equal.setOnClickListener(new Equal(webView,textView,MainActivity.getMainActivity()));
