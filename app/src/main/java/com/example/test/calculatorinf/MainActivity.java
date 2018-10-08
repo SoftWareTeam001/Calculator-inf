@@ -70,5 +70,29 @@ public class MainActivity extends AppCompatActivity {
     public void ChangeFunction(View v){
 
     }
+    public void ChangePage(View v){
+        if(ControlVar.Shift==false && ControlVar.mainPage==true){
+            MainActivity.getMainActivity().setContentView(R.layout.cal_three);
+            ControlVar.mainPage=false;
+        }
+        else if(ControlVar.Shift==true && ControlVar.mainPage==true){
+            MainActivity.getMainActivity().setContentView(R.layout.cal_four);
+            ControlVar.mainPage=false;
+        }
+        else if(ControlVar.Shift==false && ControlVar.mainPage==false){
+            MainActivity.getMainActivity().setContentView(R.layout.activity_main);
+            ControlVar.mainPage=true;
+        }
+        else if(ControlVar.Shift==true && ControlVar.mainPage==false){
+            MainActivity.getMainActivity().setContentView(R.layout.vice_cal_first);
+            ControlVar.mainPage=true;
+        }
+        Bind bind=new Bind();
+        bind.BindFunction();
+        FormulaView formulaView=(FormulaView)MainActivity.getMainActivity().findViewById(R.id.Formula);
+        TextView textView=(TextView)MainActivity.getMainActivity().findViewById(R.id.Result);
+        formulaView.setText(MyString.FormulaString);
+        textView.setText(MyString.ResultString);
+    }
 }
 

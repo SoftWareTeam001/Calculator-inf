@@ -9,12 +9,20 @@ public class ShiftBtnClick implements View.OnClickListener {
     }
     @Override
     public void onClick(View v){
-        if(ControlVar.Shift){
+        if(ControlVar.Shift && ControlVar.mainPage){
             MainActivity.getMainActivity().setContentView(R.layout.activity_main);
             ControlVar.Shift=false;
         }
-        else {
+        else if(!ControlVar.Shift &&ControlVar.mainPage){
             MainActivity.getMainActivity().setContentView(R.layout.vice_cal_first);
+            ControlVar.Shift=true;
+        }
+        else if(ControlVar.Shift && !ControlVar.mainPage){
+            MainActivity.getMainActivity().setContentView(R.layout.cal_three);
+            ControlVar.Shift=false;
+        }
+        else if(!ControlVar.Shift && !ControlVar.mainPage){
+            MainActivity.getMainActivity().setContentView(R.layout.cal_four);
             ControlVar.Shift=true;
         }
         Bind bind=new Bind();

@@ -8,7 +8,7 @@ public class ControlVar
     public static boolean rad = true;
     public static boolean sub = false;
     public static boolean sup = false;
-
+    public static boolean mainPage=true;
     public static void reset()
     {
         Shift = false;

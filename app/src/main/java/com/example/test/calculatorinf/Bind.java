@@ -46,6 +46,7 @@ public class Bind {
         ShowButton reciprocal=(ShowButton)MainActivity.getMainActivity().findViewById(R.id.Reciprocal);
         ShowButton cube=(ShowButton)MainActivity.getMainActivity().findViewById(R.id.Cube);
         ShowButton threeRoot=(ShowButton)MainActivity.getMainActivity().findViewById(R.id.Cube_root);
+        ShowButton nRoot=(ShowButton)MainActivity.getMainActivity().findViewById(R.id.NRoot);
         ShowButton power=(ShowButton)MainActivity.getMainActivity().findViewById(R.id.Power);
         ShowButton fraction=(ShowButton)MainActivity.getMainActivity().findViewById(R.id.Fraction);
         ShowButton combination=(ShowButton)MainActivity.getMainActivity().findViewById(R.id.Combination);
@@ -72,7 +73,7 @@ public class Bind {
         MyButton shift=(MyButton)MainActivity.getMainActivity().findViewById(R.id.BtnShift);
         MyButton directionLeft=(MyButton)MainActivity.getMainActivity().findViewById(R.id.DirectionLeft);
         //按完shift
-        if(ControlVar.Shift){
+        if(ControlVar.Shift &&ControlVar.mainPage){
             constE.setOnClickListener(new ShowBtnClick("e"));
             log.setOnClickListener(new ShowBtnClick("\\lg("));
             arcSin.setOnClickListener(new ShowBtnClick("\\arcsin("));
@@ -84,9 +85,25 @@ public class Bind {
             power.setOnClickListener(new SpecialBtnClick("^{}"));
             combination.setOnClickListener(new DoubleParaClick("C_{}^{}"));
             permutation.setOnClickListener(new DoubleParaClick("P_{}^{}"));
+            //通用部分
+            //括号
+            leftBrackets.setOnClickListener(new ShowBtnClick("("));
+            rightBrackets.setOnClickListener(new ShowBtnClick(")"));
+            //功能
+            clear.setOnClickListener(new ACButtonClick(formulaView));
+            delete.setOnClickListener(new DeleteBtnClick(formulaView));
+            directionRight.setOnClickListener(new RightBtnClick(formulaView));
+            directionUp.setOnClickListener(new UpDirectionBtnClick(textView, MainActivity.getMainActivity()));
+            directionDown.setOnClickListener(new DownDirectionBtnClick(textView, MainActivity.getMainActivity()));
+            directionLeft.setOnClickListener(new LeftBtnClick(formulaView));
+            history.setOnClickListener(new HistoryClick(MainActivity.getMainActivity()));
+            //等号
+            equal.setOnClickListener(new Equal(webView,textView,MainActivity.getMainActivity()));
+            //Shift
+            shift.setOnClickListener(new ShiftBtnClick());
         }
         //未按shift
-        else{
+        else if(ControlVar.mainPage &&!ControlVar.Shift){
             //数字
             numberZero.setOnClickListener(new ShowBtnClick("0"));
             numberOne.setOnClickListener(new ShowBtnClick("1"));
@@ -115,22 +132,32 @@ public class Bind {
             square.setOnClickListener(new ShowBtnClick("^{2}"));
             squreRoot.setOnClickListener(new SpecialBtnClick("\\sqrt[2]{}"));
             res.setOnClickListener(new ShowBtnClick("Res"));
+            //通用部分
+            //括号
+            leftBrackets.setOnClickListener(new ShowBtnClick("("));
+            rightBrackets.setOnClickListener(new ShowBtnClick(")"));
+            //功能
+            clear.setOnClickListener(new ACButtonClick(formulaView));
+            delete.setOnClickListener(new DeleteBtnClick(formulaView));
+            directionRight.setOnClickListener(new RightBtnClick(formulaView));
+            directionUp.setOnClickListener(new UpDirectionBtnClick(textView, MainActivity.getMainActivity()));
+            directionDown.setOnClickListener(new DownDirectionBtnClick(textView, MainActivity.getMainActivity()));
+            directionLeft.setOnClickListener(new LeftBtnClick(formulaView));
+            history.setOnClickListener(new HistoryClick(MainActivity.getMainActivity()));
+            //等号
+            equal.setOnClickListener(new Equal(webView,textView,MainActivity.getMainActivity()));
+            //Shift
+            shift.setOnClickListener(new ShiftBtnClick());
         }
-        //通用部分
-        //括号
-        leftBrackets.setOnClickListener(new ShowBtnClick("("));
-        rightBrackets.setOnClickListener(new ShowBtnClick(")"));
-        //功能
-        clear.setOnClickListener(new ACButtonClick(formulaView));
-        delete.setOnClickListener(new DeleteBtnClick(formulaView));
-        directionRight.setOnClickListener(new RightBtnClick(formulaView));
-        directionUp.setOnClickListener(new UpDirectionBtnClick(textView, MainActivity.getMainActivity()));
-        directionDown.setOnClickListener(new DownDirectionBtnClick(textView, MainActivity.getMainActivity()));
-        directionLeft.setOnClickListener(new LeftBtnClick(formulaView));
-        history.setOnClickListener(new HistoryClick(MainActivity.getMainActivity()));
-        //等号
-        equal.setOnClickListener(new Equal(webView,textView,MainActivity.getMainActivity()));
-        //Shift
-        shift.setOnClickListener(new ShiftBtnClick());
+        else if(!ControlVar.Shift &&!ControlVar.mainPage){
+            //first row
+            shift.setOnClickListener(new ShiftBtnClick());
+            //second row
+            combination.setOnClickListener(new DoubleParaClick("C_{}^{}"));
+            permutation.setOnClickListener(new DoubleParaClick("P_{}^{}"));
+            //third row
+            threeRoot.setOnClickListener(new SpecialBtnClick("\\sqrt[3]{}"));
+            nRoot.setOnClickListener(new);
+        }
     }
 }

@@ -340,12 +340,13 @@
                         android:layout_weight="1"
                         android:foreground="@drawable/mybutton"
                         android:background="@mipmap/basic_const"/>
-                    <Button
+                    <com.example.test.calculatorinf.MyButton
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:foreground="@drawable/mybutton"
-                        android:background="@mipmap/change_view"/>
+                        android:background="@mipmap/change_view"
+                        android:onClick="ChangePage"/>
 
                 </LinearLayout>
             </LinearLayout>
