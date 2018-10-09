@@ -224,7 +224,7 @@
                     android:foreground="@drawable/mybutton"
                     android:background="@mipmap/power"
                     android:id="@+id/Power"/>
-                <com.example.test.calculatorinf.ShowButton
+                <com.example.test.calculatorinf.MyButton
                     style="@style/Common"
                     android:foreground="@drawable/mybutton"
                     android:background="@mipmap/fraction"

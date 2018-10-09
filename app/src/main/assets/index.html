@@ -5,7 +5,9 @@
         <script src="math.js"></script>
         <script>
            function calculate(string){
-                return eval(string);
+                var result=eval(string);
+                result=math.round(parseFloat(result),7);
+                return result;
            }
            function lg(x){
                 return Math.log(x)/Math.log(10);

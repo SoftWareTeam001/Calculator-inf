@@ -43,15 +43,22 @@ public class Bind {
         ShowButton arcSin=(ShowButton)MainActivity.getMainActivity().findViewById(R.id.ArcSin);
         ShowButton arcCos=(ShowButton)MainActivity.getMainActivity().findViewById(R.id.ArcCos);
         ShowButton arcTan=(ShowButton)MainActivity.getMainActivity().findViewById(R.id.ArcTan);
+        ShowButton sinH=(ShowButton)MainActivity.getMainActivity().findViewById(R.id.SinH);
+        ShowButton cosH=(ShowButton)MainActivity.getMainActivity().findViewById(R.id.CosH);
+        ShowButton tanH=(ShowButton)MainActivity.getMainActivity().findViewById(R.id.TanH);
         ShowButton reciprocal=(ShowButton)MainActivity.getMainActivity().findViewById(R.id.Reciprocal);
         ShowButton cube=(ShowButton)MainActivity.getMainActivity().findViewById(R.id.Cube);
         ShowButton threeRoot=(ShowButton)MainActivity.getMainActivity().findViewById(R.id.Cube_root);
         ShowButton nRoot=(ShowButton)MainActivity.getMainActivity().findViewById(R.id.NRoot);
         ShowButton power=(ShowButton)MainActivity.getMainActivity().findViewById(R.id.Power);
-        ShowButton fraction=(ShowButton)MainActivity.getMainActivity().findViewById(R.id.Fraction);
+        MyButton fraction=(MyButton)MainActivity.getMainActivity().findViewById(R.id.Fraction);
         ShowButton combination=(ShowButton)MainActivity.getMainActivity().findViewById(R.id.Combination);
         ShowButton permutation=(ShowButton)MainActivity.getMainActivity().findViewById(R.id.Permutation);
         ShowButton squreRoot=(ShowButton)MainActivity.getMainActivity().findViewById(R.id.SquareRoot);
+        ShowButton mod=(ShowButton)MainActivity.getMainActivity().findViewById(R.id.Mod);
+        ShowButton gcd=(ShowButton)MainActivity.getMainActivity().findViewById(R.id.GCD);
+        ShowButton lcm=(ShowButton)MainActivity.getMainActivity().findViewById(R.id.LCM);
+        ShowButton exponent=(ShowButton)MainActivity.getMainActivity().findViewById(R.id.Exponent);
         //括号
         ShowButton leftBrackets = (ShowButton) MainActivity.getMainActivity().findViewById(R.id.LeftBrackets);
         ShowButton rightBrackets = (ShowButton) MainActivity.getMainActivity().findViewById(R.id.RightBrackets);
@@ -72,6 +79,7 @@ public class Bind {
         MyButton history = (MyButton) MainActivity.getMainActivity().findViewById(R.id.History);
         MyButton shift=(MyButton)MainActivity.getMainActivity().findViewById(R.id.BtnShift);
         MyButton directionLeft=(MyButton)MainActivity.getMainActivity().findViewById(R.id.DirectionLeft);
+        ShowButton factorial=(ShowButton)MainActivity.getMainActivity().findViewById(R.id.Factorial);
         //按完shift
         if(ControlVar.Shift &&ControlVar.mainPage){
             constE.setOnClickListener(new ShowBtnClick("e"));
@@ -83,8 +91,8 @@ public class Bind {
             cube.setOnClickListener(new ShowBtnClick("^{3}"));
             threeRoot.setOnClickListener(new SpecialBtnClick("\\sqrt[3]{}"));
             power.setOnClickListener(new SpecialBtnClick("^{}"));
-            combination.setOnClickListener(new DoubleParaClick("C_{}^{}"));
-            permutation.setOnClickListener(new DoubleParaClick("P_{}^{}"));
+            combination.setOnClickListener(new DoubleParaClick("C_{}^{}",4,3));
+            permutation.setOnClickListener(new DoubleParaClick("P_{}^{}",4,3));
             //通用部分
             //括号
             leftBrackets.setOnClickListener(new ShowBtnClick("("));
@@ -153,11 +161,28 @@ public class Bind {
             //first row
             shift.setOnClickListener(new ShiftBtnClick());
             //second row
-            combination.setOnClickListener(new DoubleParaClick("C_{}^{}"));
-            permutation.setOnClickListener(new DoubleParaClick("P_{}^{}"));
+            combination.setOnClickListener(new DoubleParaClick("C_{}^{}",4,3));
+            permutation.setOnClickListener(new DoubleParaClick("P_{}^{}",4,3));
             //third row
             threeRoot.setOnClickListener(new SpecialBtnClick("\\sqrt[3]{}"));
-            nRoot.setOnClickListener(new);
+            nRoot.setOnClickListener(new DoubleParaClick("\\sqrt[]{}",3,2));
+            sin.setOnClickListener(new ShowBtnClick("\\sin("));
+            cos.setOnClickListener(new ShowBtnClick("\\cos("));
+            tan.setOnClickListener(new ShowBtnClick("\\tan("));
+            //fourth row
+            cube.setOnClickListener(new ShowBtnClick("^{3}"));
+            power.setOnClickListener(new SpecialBtnClick("^{}"));
+            sinH.setOnClickListener(new ShowBtnClick("\\sinh("));
+            cosH.setOnClickListener(new ShowBtnClick("\\cosh("));
+            tanH.setOnClickListener(new ShowBtnClick("\\tanh("));
+            //fifth row
+            fraction.setOnClickListener(new FractionClick());
+            mod.setOnClickListener(new DoubleParaClick("{}\\equiv{}",9,8));
+            gcd.setOnClickListener(new DoubleParaClick("\\gcd(,)",2,1));
+            lcm.setOnClickListener(new DoubleParaClick("\\lcm(,)",2,1));
+            //sixth row
+            factorial.setOnClickListener(new ShowBtnClick("!"));
+            exponent.setOnClickListener(new SpecialBtnClick("e^{}"));
         }
     }
 }

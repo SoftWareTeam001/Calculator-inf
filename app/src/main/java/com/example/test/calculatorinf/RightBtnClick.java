@@ -23,7 +23,7 @@ public class RightBtnClick
         }
         if (ControlVar.sub)
         {
-            ControlVar.leftMove -= 3;
+            ControlVar.leftMove -= ControlVar.NextMove;
             MyString.MoveCursor(ControlVar.leftMove);
             ControlVar.sub = false;
         }

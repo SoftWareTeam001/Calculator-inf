@@ -175,7 +175,8 @@
                 <com.example.test.calculatorinf.ShowButton
                     style="@style/Common"
                     android:foreground="@drawable/mybutton"
-                    android:background="@mipmap/cube"/>
+                    android:background="@mipmap/cube"
+                    android:id="@+id/Cube"/>
                 <com.example.test.calculatorinf.ShowButton
                     style="@style/Common"
                     android:foreground="@drawable/mybutton"
@@ -192,18 +193,19 @@
                     android:foreground="@drawable/mybutton"
                     android:background="@mipmap/cosh"
                     android:id="@+id/CosH"/>
+
                 <com.example.test.calculatorinf.ShowButton
+                    android:id="@+id/TanH"
                     style="@style/Common"
-                    android:foreground="@drawable/mybutton"
                     android:background="@mipmap/tanh"
-                    android:id="@+id/TanH"/>
+                    android:foreground="@drawable/mybutton" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1">
-                <com.example.test.calculatorinf.ShowButton
+                <com.example.test.calculatorinf.MyButton
                     style="@style/Common"
                     android:foreground="@drawable/mybutton"
                     android:background="@mipmap/fraction_two"
