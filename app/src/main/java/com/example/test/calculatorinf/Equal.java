@@ -19,6 +19,7 @@ public class Equal implements View.OnClickListener {
     private WebView webView;
     private TextView textView;
     private Context mContext;
+    private String[] para=new String[100];
     public Equal(WebView webView,TextView textView,Context mContext){
         this.webView=webView;
         this.textView=textView;
@@ -65,6 +66,10 @@ public class Equal implements View.OnClickListener {
         Regex="(\\}\\$\\$)";
         initString=initString.replaceFirst(Regex, "");
         Log.i(TAG,"initString"+initString);
+        //exp
+        Regex="\\\\mathrm\\{e\\}\\^\\{(.{1,100})\\}()";
+        firstPara=getPara(Regex,initString)[0];
+        initString=initString.replaceAll(Regex,"math.exp("+firstPara+")");
         //解决组合
         initString=initString.replaceAll("C_\\{","math.combinations(");
         initString=initString.replaceAll("(?<=math.combinations\\(.{1,100})\\}\\^\\{",",");
@@ -73,6 +78,11 @@ public class Equal implements View.OnClickListener {
         initString=initString.replaceAll("P_\\{","math.permutations(");
         initString=initString.replaceAll("(?<=math.permutations\\(.{1,100})\\}\\^\\{",",");
         initString=initString.replaceAll("(?<=math.permutations\\(.{1,100},.{1,100})\\}",")");
+        //解决对数
+        Regex="\\\\log_\\{(.{1,100})\\}\\^\\{(.{1,100})\\}";
+        firstPara=getPara(Regex,initString)[0];
+        secondPara=getPara(Regex,initString)[1];
+        initString=initString.replaceAll(Regex,"math.log("+firstPara+","+secondPara+")");
         //解决根号
         Regex="\\\\sqrt\\[(.{1,100})\\]\\{(.{1,100})\\}";
         firstPara=getPara(Regex,initString)[0];
@@ -117,6 +127,9 @@ public class Equal implements View.OnClickListener {
         initString=initString.replaceAll("\\\\lcm","math.lcm");
         firstPara=getPara("(\\d{1,100})!()",initString)[0];
         initString=initString.replaceAll("\\d{1,100}!","math.factorial("+firstPara+")");
+        Regex="\\|(.{1,100})\\|";
+        setPara(Regex,initString,1);
+        initString=initString.replaceAll(Regex,"math.abs("+para[0]+")");
         //res
         MyLog myLog=new MyLog(MainActivity.getMainActivity());
         String res=myLog.GetLastLog()[1];
@@ -129,7 +142,7 @@ public class Equal implements View.OnClickListener {
             initString=initString.replaceAll("Res","0");
         }
         //e
-        initString=initString.replaceAll("e","math.E");
+        initString=initString.replaceAll("\\\\mathrm\\{e\\}","math.E");
         //删除删除时保留的括号
         initString=initString.replaceAll("\\{","").replaceAll("\\}","");
         return initString;
@@ -151,5 +164,14 @@ public class Equal implements View.OnClickListener {
             result[1]=matcher.group(2);
         }
         return result;
+    }
+    public void setPara(String Reg,String str,int paraNum){
+        Pattern pattern=Pattern.compile(Reg);
+        Matcher matcher=pattern.matcher(str);
+        if(matcher.find()){
+            for(int i=0;i<paraNum;i++){
+                para[i]=matcher.group(i+1);
+            }
+        }
     }
 }

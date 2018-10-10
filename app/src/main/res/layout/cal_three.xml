@@ -331,10 +331,11 @@
                             android:foreground="@drawable/mybutton"
                             android:background="@mipmap/npr"
                             android:id="@+id/NPr"/>
-                        <Button
+                        <com.example.test.calculatorinf.ShowButton
                             style="@style/Common"
                             android:foreground="@drawable/mybutton"
-                            android:background="@mipmap/abs"/>
+                            android:background="@mipmap/abs"
+                            android:id="@+id/ABS"/>
                         <com.example.test.calculatorinf.ShowButton
                             style="@style/Common"
                             android:foreground="@drawable/mybutton"

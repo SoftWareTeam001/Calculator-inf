@@ -59,6 +59,8 @@ public class Bind {
         ShowButton gcd=(ShowButton)MainActivity.getMainActivity().findViewById(R.id.GCD);
         ShowButton lcm=(ShowButton)MainActivity.getMainActivity().findViewById(R.id.LCM);
         ShowButton exponent=(ShowButton)MainActivity.getMainActivity().findViewById(R.id.Exponent);
+        ShowButton logx=(ShowButton)MainActivity.getMainActivity().findViewById(R.id.LogX);
+        ShowButton npr=(ShowButton)MainActivity.getMainActivity().findViewById(R.id.NPr);
         //括号
         ShowButton leftBrackets = (ShowButton) MainActivity.getMainActivity().findViewById(R.id.LeftBrackets);
         ShowButton rightBrackets = (ShowButton) MainActivity.getMainActivity().findViewById(R.id.RightBrackets);
@@ -80,9 +82,10 @@ public class Bind {
         MyButton shift=(MyButton)MainActivity.getMainActivity().findViewById(R.id.BtnShift);
         MyButton directionLeft=(MyButton)MainActivity.getMainActivity().findViewById(R.id.DirectionLeft);
         ShowButton factorial=(ShowButton)MainActivity.getMainActivity().findViewById(R.id.Factorial);
+        ShowButton abs=(ShowButton)MainActivity.getMainActivity().findViewById(R.id.ABS);
         //按完shift
         if(ControlVar.Shift &&ControlVar.mainPage){
-            constE.setOnClickListener(new ShowBtnClick("e"));
+            constE.setOnClickListener(new ShowBtnClick("\\mathrm{e}"));
             log.setOnClickListener(new ShowBtnClick("\\lg("));
             arcSin.setOnClickListener(new ShowBtnClick("\\arcsin("));
             arcCos.setOnClickListener(new ShowBtnClick("\\arccos"));
@@ -109,6 +112,7 @@ public class Bind {
             equal.setOnClickListener(new Equal(webView,textView,MainActivity.getMainActivity()));
             //Shift
             shift.setOnClickListener(new ShiftBtnClick());
+            exponent.setOnClickListener(new SpecialBtnClick("\\mathrm{e}^{}"));
         }
         //未按shift
         else if(ControlVar.mainPage &&!ControlVar.Shift){
@@ -182,7 +186,15 @@ public class Bind {
             lcm.setOnClickListener(new DoubleParaClick("\\lcm(,)",2,1));
             //sixth row
             factorial.setOnClickListener(new ShowBtnClick("!"));
-            exponent.setOnClickListener(new SpecialBtnClick("e^{}"));
+            exponent.setOnClickListener(new SpecialBtnClick("\\mathrm{e}^{}"));
+            log.setOnClickListener(new ShowBtnClick("\\lg("));
+            //seventh row
+            reciprocal.setOnClickListener(new ShowBtnClick("^{-1}"));
+            constE.setOnClickListener(new ShowBtnClick("\\mathrm{e}"));
+            logx.setOnClickListener(new DoubleParaClick("\\log_{}^{}",4,3));
+            //eightth row
+            npr.setOnClickListener(new ShowBtnClick("NPr("));
+            abs.setOnClickListener(new SpecialBtnClick("||"));
         }
     }
 }
