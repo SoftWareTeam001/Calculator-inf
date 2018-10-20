@@ -1,6 +1,8 @@
 package com.example.test.calculatorinf;
 import android.app.Activity;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -35,6 +37,9 @@ public class MainActivity extends AppCompatActivity {
     public static MainActivity getMainActivity(){
         return mainActivity;
     }
+    private Context mContext;
+    private AlertDialog.Builder builder = null;
+    private AlertDialog alert=null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,19 +52,15 @@ public class MainActivity extends AppCompatActivity {
         FormulaView formulaView = (FormulaView) findViewById(R.id.Formula);
         formulaView.setText(MyString.FormulaString);
         //绑定事件
-        Bind bind=new Bind();
+        Bind bind = new Bind();
         bind.BindFunction();
         //生成日志文件
         logInit();
         //外部类调用
     }
-
     //绑定事件函数
-
-
-
     //日志初始化
-    private void logInit() {
+    private void logInit(){
         try {
             FileOutputStream fileOutputStream = MainActivity.this.openFileOutput("log.txt", MODE_APPEND);
             fileOutputStream.close();
@@ -71,19 +72,19 @@ public class MainActivity extends AppCompatActivity {
 
     }
     public void ChangePage(View v){
-        if(ControlVar.Shift==false && ControlVar.mainPage==true){
+        if(!ControlVar.Shift && ControlVar.mainPage){
             MainActivity.getMainActivity().setContentView(R.layout.cal_three);
             ControlVar.mainPage=false;
         }
-        else if(ControlVar.Shift==true && ControlVar.mainPage==true){
+        else if(ControlVar.Shift && ControlVar.mainPage){
             MainActivity.getMainActivity().setContentView(R.layout.cal_four);
             ControlVar.mainPage=false;
         }
-        else if(ControlVar.Shift==false && ControlVar.mainPage==false){
+        else if(!ControlVar.Shift && !ControlVar.mainPage){
             MainActivity.getMainActivity().setContentView(R.layout.activity_main);
             ControlVar.mainPage=true;
         }
-        else if(ControlVar.Shift==true && ControlVar.mainPage==false){
+        else if(ControlVar.Shift && !ControlVar.mainPage){
             MainActivity.getMainActivity().setContentView(R.layout.vice_cal_first);
             ControlVar.mainPage=true;
         }

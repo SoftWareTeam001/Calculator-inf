@@ -83,6 +83,8 @@ public class Bind {
         MyButton directionLeft=(MyButton)MainActivity.getMainActivity().findViewById(R.id.DirectionLeft);
         ShowButton factorial=(ShowButton)MainActivity.getMainActivity().findViewById(R.id.Factorial);
         ShowButton abs=(ShowButton)MainActivity.getMainActivity().findViewById(R.id.ABS);
+
+        MyButton menu=(MyButton)MainActivity.getMainActivity().findViewById(R.id.Menu);
         //按完shift
         if(ControlVar.Shift &&ControlVar.mainPage){
             constE.setOnClickListener(new ShowBtnClick("\\mathrm{e}"));
@@ -160,7 +162,9 @@ public class Bind {
             equal.setOnClickListener(new Equal(webView,textView,MainActivity.getMainActivity()));
             //Shift
             shift.setOnClickListener(new ShiftBtnClick());
+            menu.setOnClickListener(new MenuAlertDialog());
         }
+        //第三个页面
         else if(!ControlVar.Shift &&!ControlVar.mainPage){
             //first row
             shift.setOnClickListener(new ShiftBtnClick());

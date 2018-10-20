@@ -10,6 +10,7 @@ public class ControlVar
     public static boolean sup = false;
     public static boolean mainPage=true;
     public static int NextMove=1;
+    public static int Mode=1;
     public static void reset()
     {
         Shift = false;
