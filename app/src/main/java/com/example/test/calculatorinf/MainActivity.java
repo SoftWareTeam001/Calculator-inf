@@ -1,34 +1,25 @@
 package com.example.test.calculatorinf;
-import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
-import android.webkit.ValueCallback;
-import android.webkit.WebSettings;
-import android.webkit.WebView;
-import android.widget.Button;
+import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.daquexian.flexiblerichtextview.TextWithFormula;
-
 import org.scilab.forge.jlatexmath.core.AjLatexMath;
 
-import java.io.BufferedReader;
-import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
-import java.io.UnsupportedEncodingException;
 
 import io.github.kbiakov.codeview.classifier.CodeProcessor;
+
+import static com.example.test.calculatorinf.R.layout.dialog_customize;
+
 public class MainActivity extends AppCompatActivity {
     private static MainActivity mainActivity;
     public MainActivity(){
@@ -37,9 +28,6 @@ public class MainActivity extends AppCompatActivity {
     public static MainActivity getMainActivity(){
         return mainActivity;
     }
-    private Context mContext;
-    private AlertDialog.Builder builder = null;
-    private AlertDialog alert=null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -72,22 +60,25 @@ public class MainActivity extends AppCompatActivity {
 
     }
     public void ChangePage(View v){
-        if(!ControlVar.Shift && ControlVar.mainPage){
+        if(ControlVar.Mode==1&&!ControlVar.Shift&&!ControlVar.mainPage){
+            MainActivity.getMainActivity().setContentView(R.layout.mat_one);
+        }
+        else if(ControlVar.Mode==2&&!ControlVar.Shift&&!ControlVar.mainPage){
+            MainActivity.getMainActivity().setContentView(R.layout.complex_one);
+        }
+        else if(!ControlVar.Shift && ControlVar.mainPage){
             MainActivity.getMainActivity().setContentView(R.layout.cal_three);
-            ControlVar.mainPage=false;
         }
         else if(ControlVar.Shift && ControlVar.mainPage){
             MainActivity.getMainActivity().setContentView(R.layout.cal_four);
-            ControlVar.mainPage=false;
         }
         else if(!ControlVar.Shift && !ControlVar.mainPage){
             MainActivity.getMainActivity().setContentView(R.layout.activity_main);
-            ControlVar.mainPage=true;
         }
         else if(ControlVar.Shift && !ControlVar.mainPage){
-            MainActivity.getMainActivity().setContentView(R.layout.vice_cal_first);
-            ControlVar.mainPage=true;
+            MainActivity.getMainActivity().setContentView(R.layout.cal_two);
         }
+        ControlVar.mainPage=!ControlVar.mainPage;//改变状态
         Bind bind=new Bind();
         bind.BindFunction();
         FormulaView formulaView=(FormulaView)MainActivity.getMainActivity().findViewById(R.id.Formula);

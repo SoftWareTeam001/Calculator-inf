@@ -1,8 +1,12 @@
 package com.example.test.calculatorinf;
 
+import android.text.method.ScrollingMovementMethod;
+import android.util.Log;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.TextView;
+
+import static android.content.ContentValues.TAG;
 
 public class Bind {
     public Bind(){
@@ -17,6 +21,9 @@ public class Bind {
         WebSettings webSettings = webView.getSettings();
         webSettings.setJavaScriptEnabled(true);
         //绑定控件
+        //文本框滚动
+        textView.setMovementMethod(ScrollingMovementMethod.getInstance());
+        textView.setHorizontallyScrolling(true);
         //十个数字
         ShowButton numberZero = (ShowButton) MainActivity.getMainActivity().findViewById(R.id.NumberZero);
         ShowButton numberOne = (ShowButton) MainActivity.getMainActivity().findViewById(R.id.NumberOne);
@@ -46,6 +53,9 @@ public class Bind {
         ShowButton sinH=(ShowButton)MainActivity.getMainActivity().findViewById(R.id.SinH);
         ShowButton cosH=(ShowButton)MainActivity.getMainActivity().findViewById(R.id.CosH);
         ShowButton tanH=(ShowButton)MainActivity.getMainActivity().findViewById(R.id.TanH);
+        ShowButton arcSinH=(ShowButton) MainActivity.getMainActivity().findViewById(R.id.ArcSinH);
+        ShowButton arcCosH=(ShowButton)MainActivity.getMainActivity().findViewById(R.id.ArcCosH);
+        ShowButton arcTanH=(ShowButton)MainActivity.getMainActivity().findViewById(R.id.ArcTanH);
         ShowButton reciprocal=(ShowButton)MainActivity.getMainActivity().findViewById(R.id.Reciprocal);
         ShowButton cube=(ShowButton)MainActivity.getMainActivity().findViewById(R.id.Cube);
         ShowButton threeRoot=(ShowButton)MainActivity.getMainActivity().findViewById(R.id.Cube_root);
@@ -83,87 +93,90 @@ public class Bind {
         MyButton directionLeft=(MyButton)MainActivity.getMainActivity().findViewById(R.id.DirectionLeft);
         ShowButton factorial=(ShowButton)MainActivity.getMainActivity().findViewById(R.id.Factorial);
         ShowButton abs=(ShowButton)MainActivity.getMainActivity().findViewById(R.id.ABS);
-
         MyButton menu=(MyButton)MainActivity.getMainActivity().findViewById(R.id.Menu);
-        //按完shift
-        if(ControlVar.Shift &&ControlVar.mainPage){
+        MyButton newMat=(MyButton)MainActivity.getMainActivity().findViewById(R.id.NewMat);
+        //第一个页面
+        if(ControlVar.Mode==0&&ControlVar.mainPage &&!ControlVar.Shift){
+            //firstRow
+            shift.setOnClickListener(new ShiftBtnClick());
+            directionUp.setOnClickListener(new UpDirectionBtnClick(textView, MainActivity.getMainActivity()));
+            delete.setOnClickListener(new DeleteBtnClick(formulaView));
+            //secondRow
+            clear.setOnClickListener(new ACButtonClick(formulaView));
+            directionLeft.setOnClickListener(new LeftBtnClick(formulaView));
+            directionDown.setOnClickListener(new DownDirectionBtnClick(textView, MainActivity.getMainActivity()));
+            directionRight.setOnClickListener(new RightBtnClick(formulaView));
+            history.setOnClickListener(new HistoryClick(MainActivity.getMainActivity()));
+            //third Row
+            constPi.setOnClickListener(new ShowBtnClick("\\pi "));
+            ln.setOnClickListener(new ShowBtnClick("\\ln("));
+            sin.setOnClickListener(new ShowBtnClick("\\sin("));
+            cos.setOnClickListener(new ShowBtnClick("\\cos("));
+            tan.setOnClickListener(new ShowBtnClick("\\tan("));
+            //fourth row
+            square.setOnClickListener(new ShowBtnClick("^{2}"));
+            squreRoot.setOnClickListener(new SpecialBtnClick("\\sqrt[2]{}"));
+            leftBrackets.setOnClickListener(new ShowBtnClick("("));
+            rightBrackets.setOnClickListener(new ShowBtnClick(")"));
+            //fifth row
+            numberSeven.setOnClickListener(new ShowBtnClick("7"));
+            numberEight.setOnClickListener(new ShowBtnClick("8"));
+            numberNine.setOnClickListener(new ShowBtnClick("9"));
+            multiply.setOnClickListener(new ShowBtnClick("\\times "));
+            divide.setOnClickListener(new ShowBtnClick("\\div "));
+            //sixth row
+            numberFour.setOnClickListener(new ShowBtnClick("4"));
+            numberFive.setOnClickListener(new ShowBtnClick("5"));
+            numberSix.setOnClickListener(new ShowBtnClick("6"));
+            add.setOnClickListener(new ShowBtnClick("+"));
+            minus.setOnClickListener(new ShowBtnClick("-"));
+            //seventh row
+            numberOne.setOnClickListener(new ShowBtnClick("1"));
+            numberTwo.setOnClickListener(new ShowBtnClick("2"));
+            numberThree.setOnClickListener(new ShowBtnClick("3"));
+            res.setOnClickListener(new ShowBtnClick("Res"));
+            //eighth row
+            numberZero.setOnClickListener(new ShowBtnClick("0"));
+            numberPint.setOnClickListener(new ShowBtnClick("."));
+            equal.setOnClickListener(new Equal(webView,textView,MainActivity.getMainActivity()));
+            //ninth row
+            menu.setOnClickListener(new MenuAlertDialog());
+        }
+        //第二个页面
+        else if(ControlVar.Shift &&ControlVar.mainPage){
+            //firstRow
+            shift.setOnClickListener(new ShiftBtnClick());
+            directionUp.setOnClickListener(new UpDirectionBtnClick(textView, MainActivity.getMainActivity()));
+            delete.setOnClickListener(new DeleteBtnClick(formulaView));
+            //secondRow
+            clear.setOnClickListener(new ACButtonClick(formulaView));
+            directionLeft.setOnClickListener(new LeftBtnClick(formulaView));
+            directionDown.setOnClickListener(new DownDirectionBtnClick(textView, MainActivity.getMainActivity()));
+            directionRight.setOnClickListener(new RightBtnClick(formulaView));
+            history.setOnClickListener(new HistoryClick(MainActivity.getMainActivity()));
+            //third row
             constE.setOnClickListener(new ShowBtnClick("\\mathrm{e}"));
             log.setOnClickListener(new ShowBtnClick("\\lg("));
             arcSin.setOnClickListener(new ShowBtnClick("\\arcsin("));
             arcCos.setOnClickListener(new ShowBtnClick("\\arccos"));
             arcTan.setOnClickListener(new ShowBtnClick("\\arctan("));
+            //fourth row
             reciprocal.setOnClickListener(new ShowBtnClick("^{-1}"));
             cube.setOnClickListener(new ShowBtnClick("^{3}"));
             threeRoot.setOnClickListener(new SpecialBtnClick("\\sqrt[3]{}"));
+            leftBrackets.setOnClickListener(new ShowBtnClick("("));
+            rightBrackets.setOnClickListener(new ShowBtnClick(")"));
+            //fifth row
             power.setOnClickListener(new SpecialBtnClick("^{}"));
+            //sixth row
             combination.setOnClickListener(new DoubleParaClick("C_{}^{}",4,3));
             permutation.setOnClickListener(new DoubleParaClick("P_{}^{}",4,3));
-            //通用部分
-            //括号
-            leftBrackets.setOnClickListener(new ShowBtnClick("("));
-            rightBrackets.setOnClickListener(new ShowBtnClick(")"));
-            //功能
-            clear.setOnClickListener(new ACButtonClick(formulaView));
-            delete.setOnClickListener(new DeleteBtnClick(formulaView));
-            directionRight.setOnClickListener(new RightBtnClick(formulaView));
-            directionUp.setOnClickListener(new UpDirectionBtnClick(textView, MainActivity.getMainActivity()));
-            directionDown.setOnClickListener(new DownDirectionBtnClick(textView, MainActivity.getMainActivity()));
-            directionLeft.setOnClickListener(new LeftBtnClick(formulaView));
-            history.setOnClickListener(new HistoryClick(MainActivity.getMainActivity()));
-            //等号
-            equal.setOnClickListener(new Equal(webView,textView,MainActivity.getMainActivity()));
-            //Shift
-            shift.setOnClickListener(new ShiftBtnClick());
+            //seventh row
+            //eighth row
             exponent.setOnClickListener(new SpecialBtnClick("\\mathrm{e}^{}"));
-        }
-        //未按shift
-        else if(ControlVar.mainPage &&!ControlVar.Shift){
-            //数字
-            numberZero.setOnClickListener(new ShowBtnClick("0"));
-            numberOne.setOnClickListener(new ShowBtnClick("1"));
-            numberTwo.setOnClickListener(new ShowBtnClick("2"));
-            numberThree.setOnClickListener(new ShowBtnClick("3"));
-            numberFour.setOnClickListener(new ShowBtnClick("4"));
-            numberFive.setOnClickListener(new ShowBtnClick("5"));
-            numberSix.setOnClickListener(new ShowBtnClick("6"));
-            numberSeven.setOnClickListener(new ShowBtnClick("7"));
-            numberEight.setOnClickListener(new ShowBtnClick("8"));
-            numberNine.setOnClickListener(new ShowBtnClick("9"));
-            numberPint.setOnClickListener(new ShowBtnClick("."));
-            //运算符
-            add.setOnClickListener(new ShowBtnClick("+"));
-            minus.setOnClickListener(new ShowBtnClick("-"));
-            multiply.setOnClickListener(new ShowBtnClick("\\times "));
-            divide.setOnClickListener(new ShowBtnClick("\\div "));
-            //函数
-            sin.setOnClickListener(new ShowBtnClick("\\sin("));
-            cos.setOnClickListener(new ShowBtnClick("\\cos("));
-            tan.setOnClickListener(new ShowBtnClick("\\tan("));
-            ln.setOnClickListener(new ShowBtnClick("\\ln("));
-            //常数
-            constPi.setOnClickListener(new ShowBtnClick("\\pi "));
-            //特殊
-            square.setOnClickListener(new ShowBtnClick("^{2}"));
-            squreRoot.setOnClickListener(new SpecialBtnClick("\\sqrt[2]{}"));
-            res.setOnClickListener(new ShowBtnClick("Res"));
-            //通用部分
-            //括号
-            leftBrackets.setOnClickListener(new ShowBtnClick("("));
-            rightBrackets.setOnClickListener(new ShowBtnClick(")"));
-            //功能
-            clear.setOnClickListener(new ACButtonClick(formulaView));
-            delete.setOnClickListener(new DeleteBtnClick(formulaView));
-            directionRight.setOnClickListener(new RightBtnClick(formulaView));
-            directionUp.setOnClickListener(new UpDirectionBtnClick(textView, MainActivity.getMainActivity()));
-            directionDown.setOnClickListener(new DownDirectionBtnClick(textView, MainActivity.getMainActivity()));
-            directionLeft.setOnClickListener(new LeftBtnClick(formulaView));
-            history.setOnClickListener(new HistoryClick(MainActivity.getMainActivity()));
-            //等号
-            equal.setOnClickListener(new Equal(webView,textView,MainActivity.getMainActivity()));
-            //Shift
-            shift.setOnClickListener(new ShiftBtnClick());
+            //ninth row
             menu.setOnClickListener(new MenuAlertDialog());
-        }
+    }
         //第三个页面
         else if(!ControlVar.Shift &&!ControlVar.mainPage){
             //first row
@@ -199,6 +212,89 @@ public class Bind {
             //eightth row
             npr.setOnClickListener(new ShowBtnClick("NPr("));
             abs.setOnClickListener(new SpecialBtnClick("||"));
+            //ninth row
+            menu.setOnClickListener(new MenuAlertDialog());
+        }
+        //第四个页面
+        else if(!ControlVar.mainPage && ControlVar.Shift){
+            //first row
+            shift.setOnClickListener(new ShiftBtnClick());
+            //second row
+            combination.setOnClickListener(new DoubleParaClick("C_{}^{}",4,3));
+            permutation.setOnClickListener(new DoubleParaClick("P_{}^{}",4,3));
+            //third row
+            threeRoot.setOnClickListener(new SpecialBtnClick("\\sqrt[3]{}"));
+            nRoot.setOnClickListener(new DoubleParaClick("\\sqrt[]{}",3,2));
+            arcSin.setOnClickListener(new ShowBtnClick("\\asin("));
+            arcCos.setOnClickListener(new ShowBtnClick("\\acos("));
+            arcTan.setOnClickListener(new ShowBtnClick("\\atan("));
+            //fourth row
+            cube.setOnClickListener(new ShowBtnClick("^{3}"));
+            power.setOnClickListener(new SpecialBtnClick("^{}"));
+            arcSinH.setOnClickListener(new ShowBtnClick("\\asinh("));
+            arcCosH.setOnClickListener(new ShowBtnClick("\\acosh("));
+            arcTanH.setOnClickListener(new ShowBtnClick("\\atanh("));
+            //fifth row
+            fraction.setOnClickListener(new FractionClick());
+            mod.setOnClickListener(new DoubleParaClick("{}\\equiv{}",9,8));
+            gcd.setOnClickListener(new DoubleParaClick("\\gcd(,)",2,1));
+            lcm.setOnClickListener(new DoubleParaClick("\\lcm(,)",2,1));
+            //sixth row
+            factorial.setOnClickListener(new ShowBtnClick("!"));
+            exponent.setOnClickListener(new SpecialBtnClick("\\mathrm{e}^{}"));
+            log.setOnClickListener(new ShowBtnClick("\\lg("));
+            //seventh row
+            reciprocal.setOnClickListener(new ShowBtnClick("^{-1}"));
+            constE.setOnClickListener(new ShowBtnClick("\\mathrm{e}"));
+            logx.setOnClickListener(new DoubleParaClick("\\log_{}^{}",4,3));
+            //eightth row
+            npr.setOnClickListener(new ShowBtnClick("NPr("));
+            abs.setOnClickListener(new SpecialBtnClick("||"));
+            //ninth row
+            menu.setOnClickListener(new MenuAlertDialog());
+        }
+        //矩阵第一个页面
+        else if(ControlVar.Mode==1&&!ControlVar.Shift&&ControlVar.mainPage){
+            //firstRow
+            shift.setOnClickListener(new ShiftBtnClick());
+            directionUp.setOnClickListener(new UpDirectionBtnClick(textView, MainActivity.getMainActivity()));
+            delete.setOnClickListener(new DeleteBtnClick(formulaView));
+            //secondRow
+            clear.setOnClickListener(new ACButtonClick(formulaView));
+            directionLeft.setOnClickListener(new LeftBtnClick(formulaView));
+            directionDown.setOnClickListener(new DownDirectionBtnClick(textView, MainActivity.getMainActivity()));
+            directionRight.setOnClickListener(new RightBtnClick(formulaView));
+            history.setOnClickListener(new HistoryClick(MainActivity.getMainActivity()));
+            //third row
+            //fifth row
+            numberSeven.setOnClickListener(new ShowBtnClick("7"));
+            numberEight.setOnClickListener(new ShowBtnClick("8"));
+            numberNine.setOnClickListener(new ShowBtnClick("9"));
+            multiply.setOnClickListener(new ShowBtnClick("\\times "));
+            divide.setOnClickListener(new ShowBtnClick("\\div "));
+            //sixth row
+            numberFour.setOnClickListener(new ShowBtnClick("4"));
+            numberFive.setOnClickListener(new ShowBtnClick("5"));
+            numberSix.setOnClickListener(new ShowBtnClick("6"));
+            add.setOnClickListener(new ShowBtnClick("+"));
+            minus.setOnClickListener(new ShowBtnClick("-"));
+            //seventh row
+            numberOne.setOnClickListener(new ShowBtnClick("1"));
+            numberTwo.setOnClickListener(new ShowBtnClick("2"));
+            numberThree.setOnClickListener(new ShowBtnClick("3"));
+            res.setOnClickListener(new ShowBtnClick("Res"));
+            //eighth row
+            numberZero.setOnClickListener(new ShowBtnClick("0"));
+            numberPint.setOnClickListener(new ShowBtnClick("."));
+            equal.setOnClickListener(new Equal(webView,textView,MainActivity.getMainActivity()));
+            //ninth row
+            menu.setOnClickListener(new MenuAlertDialog());
+            newMat.setOnClickListener(new NewMat());
+        }
+        //复数第一个页面
+        else if(ControlVar.Mode==2&&!ControlVar.Shift&&ControlVar.mainPage){
+            //ninth row
+            menu.setOnClickListener(new MenuAlertDialog());
         }
     }
 }

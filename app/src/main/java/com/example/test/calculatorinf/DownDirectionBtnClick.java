@@ -2,6 +2,7 @@ package com.example.test.calculatorinf;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -14,12 +15,17 @@ public class DownDirectionBtnClick implements View.OnClickListener {
     }
     @Override
     public void onClick(View v){
-        MyLog myLog=new MyLog(context);
-        String[] nextLog=myLog.GetNextLog();
-        FormulaView formulaView=(FormulaView)MainActivity.getMainActivity().findViewById(R.id.Formula);
-        formulaView.setText(nextLog[0]);
-        textView.setText(nextLog[1]);
-        MyString.FormulaString=nextLog[0];
-        MyString.ResultString=nextLog[1];
+        try{
+            MyLog myLog=new MyLog(context);
+            String[] nextLog=myLog.GetNextLog();
+            FormulaView formulaView=(FormulaView)MainActivity.getMainActivity().findViewById(R.id.Formula);
+            formulaView.setText(nextLog[0]);
+            textView.setText(nextLog[1]);
+            MyString.FormulaString=nextLog[0];
+            MyString.ResultString=nextLog[1];
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
     }
 }

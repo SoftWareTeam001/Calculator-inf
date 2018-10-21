@@ -13,21 +13,23 @@ public class LeftBtnClick implements View.OnClickListener {
 
     public void onClick(View paramView) {
         int location = MyString.FormulaString.indexOf("{\\textcolor{yellow}|}");
+        Boolean hasMoved=false;
         while (true) {
             StringBuilder str = new StringBuilder();
             str.append(MyString.FormulaString.charAt(location - 1));
             Log.i("GifHeaderParser", str.toString());
-            if (location >= 25) {
-                if (str.toString().matches("[a-z]")||str.toString().matches(" ")) {
+                if (!str.toString().matches("[0-9]")&&location>25){
                     ControlVar.leftMove += 1;
                     location -= 1;
+                    hasMoved=true;
                 }
                 else {
+                    if(!hasMoved){
+                        ControlVar.leftMove += 1;
+                    }
                     break;
                 }
-            }
         }
-        ControlVar.leftMove += 1;
         MyString.MoveCursor(ControlVar.leftMove);
         Log.i("GifHeaderParser", MyString.FormulaString);
     }

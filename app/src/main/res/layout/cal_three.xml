@@ -346,12 +346,13 @@
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
                         android:layout_weight="1">
-                        <Button
+                        <com.example.test.calculatorinf.MyButton
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             android:layout_weight="1"
                             android:foreground="@drawable/mybutton"
-                            android:background="@mipmap/mode" />
+                            android:background="@mipmap/mode"
+                            android:id="@+id/Menu"/>
                         <Button
                             android:layout_width="0dp"
                             android:layout_height="match_parent"

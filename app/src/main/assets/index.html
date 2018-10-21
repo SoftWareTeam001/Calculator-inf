@@ -6,8 +6,15 @@
         <script>
            function calculate(string){
                 var result=eval(string);
-                result=math.round(parseFloat(result),7);
-                return result;
+                ApproResult=math.round(parseFloat(result),7);
+                if(ApproResult){
+                    return ApproResult;
+                }
+                else{
+                    var reg = new RegExp('"',"g");
+                    result=String(result).replace(reg,"")
+                    return result;
+                }
            }
            function lg(x){
                 return Math.log(x)/Math.log(10);
