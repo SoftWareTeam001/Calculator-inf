@@ -147,7 +147,7 @@
                     style="@style/Common"
                     android:foreground="@drawable/mybutton"
                     android:background="@mipmap/cros"
-                    android:id="@+id/ConstPi"/>
+                    android:id="@+id/Cross"/>
                 <com.example.test.calculatorinf.ShowButton
                     style="@style/Common"
                     android:foreground="@drawable/mybutton"

@@ -95,6 +95,7 @@ public class Bind {
         ShowButton abs=(ShowButton)MainActivity.getMainActivity().findViewById(R.id.ABS);
         MyButton menu=(MyButton)MainActivity.getMainActivity().findViewById(R.id.Menu);
         MyButton newMat=(MyButton)MainActivity.getMainActivity().findViewById(R.id.NewMat);
+        ShowButton cross=(ShowButton)MainActivity.getMainActivity().findViewById(R.id.Cross);
         //第一个页面
         if(ControlVar.Mode==0&&ControlVar.mainPage &&!ControlVar.Shift){
             //firstRow
@@ -266,6 +267,7 @@ public class Bind {
             directionRight.setOnClickListener(new RightBtnClick(formulaView));
             history.setOnClickListener(new HistoryClick(MainActivity.getMainActivity()));
             //third row
+            cross.setOnClickListener(new ShowBtnClick("\\textcolor{orange}\\times"));
             //fifth row
             numberSeven.setOnClickListener(new ShowBtnClick("7"));
             numberEight.setOnClickListener(new ShowBtnClick("8"));

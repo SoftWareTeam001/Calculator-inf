@@ -37,7 +37,7 @@ public class NewMat implements View.OnClickListener{
                             }
                         }
                         for (int i = 0; i < column.getChildCount(); i++) {
-                            RadioButton rd = (RadioButton) row.getChildAt(i);
+                            RadioButton rd = (RadioButton) column.getChildAt(i);
                             if(rd.isChecked()){
                                 Mcolumn=Integer.parseInt(rd.getText().toString());
                             }

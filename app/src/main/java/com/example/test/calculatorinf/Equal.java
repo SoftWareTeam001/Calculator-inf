@@ -154,6 +154,11 @@ public class Equal implements View.OnClickListener {
         initString=initString.replaceAll("\\\\\\\\\\\\endmatrix\\\\right\\]","]])");
         initString=initString.replaceAll("&",",");
         initString=initString.replaceAll("\\\\\\\\","],[");
+        //叉乘
+        Log.i(TAG,"matinit:"+initString);
+        Regex="math\\.matrix\\(\\[(.{1,100})\\]\\)\\\\textcolororange\\*math\\.matrix\\(\\[(.{1,100})\\]\\)";
+        setPara(Regex,initString,2);
+        initString=initString.replaceAll(Regex,"math.cross("+para[0]+","+para[1]+")");
         //矩阵相乘
         Log.i(TAG,"matinit:"+initString);
         Regex="(math.matrix.{1,100}]]\\))\\*(math.matrix.{1,100}]]\\))";
@@ -173,7 +178,6 @@ public class Equal implements View.OnClickListener {
         setPara(Regex,initString,2);
         initString=initString.replaceAll(Regex,"math.add("+para[0]+","+para[1]+")");
         //矩阵相减
-        Log.i(TAG,"matinit:"+initString);
         Regex="(math.matrix.{1,100}]]\\))\\-(math.matrix.{1,100}]]\\))";
         setPara(Regex,initString,2);
         initString=initString.replaceAll(Regex,"math.subtract("+para[0]+","+para[1]+")");
