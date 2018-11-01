@@ -1,0 +1,11 @@
+{
+    "Name":"CalculatorInf",
+    "Team":[
+        "郭梦飞",
+        "李晓宇",
+        "尚会东",
+        "李棋"
+    ],
+    "Abstract":"该项目旨在开发出一款Android平台上功能强大的科学计算器",
+    "Cover":"src/img.png"
+}
